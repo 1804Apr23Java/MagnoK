@@ -19,10 +19,8 @@ public class Consumer extends Thread {
 	public synchronized void takeFromBasket() throws InterruptedException {
 		while(true) {
 			// Consumer waits for the basket to not be empty and for there to be enough to take
-			while (Basket.basket.size() == 0 || howMuchToTake > Basket.basket.size()) {
+			while (Basket.basket.size() == 0 || howMuchToTake > Basket.basket.size()) 
 				wait();
-				System.out.println("Still waiting");
-			}
 	
 			// Consumer takes amount from basket
 			Basket.take(howMuchToTake);
