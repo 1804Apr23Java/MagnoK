@@ -4,26 +4,25 @@ public class Producer extends Thread{
 	
 	public void run() {
 		// Continuous loop
-		while (true) {
-			try {
-				addToBasket();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			System.out.println(Basket.basket.getFirst());
+		try {
+			addToBasket();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
 	public synchronized void addToBasket() throws InterruptedException {
-		
 		// Producer waits for basket to be empty or waits if it is full
 		while(Basket.basket.size() != 0 || Basket.basket.size() == MAX_CAP)
 			wait();
-		
-		// Producer starts adding to the basket
-		Basket.basket.add("Ready to Consume!");
-		System.out.println("Producer produced!");
-		
+			
+		// Producer fills the basket
+		while(Basket.basket.size() < MAX_CAP) {
+			Basket.basket.add("Ready to Consume!");
+			System.out.println("Producer produced!");
+			System.out.println(Basket.basket.getFirst());
+		}
+			
 		// Will alert the Consumer to consume
 		notify();
 	}
