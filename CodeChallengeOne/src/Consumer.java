@@ -1,9 +1,14 @@
 import java.util.Random;
 
 public class Consumer extends Thread {
+	public static final int MAX_CAP = 33;
+	
+	Random r = new Random();
+	int howMuchToTake = r.nextInt(MAX_CAP) + 1;
+	
 
 	public void run() {
-		// Continuous loop
+		System.out.println("Consumer is trying to take : " + howMuchToTake);
 		try {
 			takeFromBasket();
 		} catch (InterruptedException e) {
@@ -13,20 +18,15 @@ public class Consumer extends Thread {
 
 	public synchronized void takeFromBasket() throws InterruptedException {
 		while(true) {
-			Random r = new Random();
-			int howMuchToTake;
-			howMuchToTake = r.nextInt(33) + 1;
-	
 			// Consumer waits for the basket to not be empty and for there to be enough to take
-			while (Basket.basket.size() == 0 || howMuchToTake > Basket.basket.size())
+			while (Basket.basket.size() == 0 || howMuchToTake > Basket.basket.size()) {
 				wait();
+				System.out.println("Still waiting");
+			}
 	
 			// Consumer takes amount from basket
-			for (int i = 0; i < howMuchToTake; i++) {
-				// Removes from head
-				System.out.println("Consumer consumed! : " + Basket.basket.get(i));
-				Basket.basket.removeFirst();
-			}
+			Basket.take(howMuchToTake);
+			System.out.println("Consumer has taken!");
 	
 			// Will alert the Producer to produce
 			notify();

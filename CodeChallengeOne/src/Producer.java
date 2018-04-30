@@ -1,9 +1,13 @@
+import java.util.Random;
 
 public class Producer extends Thread{
 	public static final int MAX_CAP = 33;
 	
+	Random r = new Random();
+	int howMuchToAdd = r.nextInt(MAX_CAP) + 1;
+	
 	public void run() {
-		// Continuous loop
+		System.out.println("Producer added : " + howMuchToAdd);
 		try {
 			addToBasket();
 		} catch (InterruptedException e) {
@@ -17,14 +21,14 @@ public class Producer extends Thread{
 			wait();
 			
 		// Producer fills the basket
-		while(Basket.basket.size() < MAX_CAP) {
-			Basket.basket.add("Ready to Consume!");
-			System.out.println("Producer produced!");
-			System.out.println(Basket.basket.getFirst());
-		}
+		Basket.add(howMuchToAdd);
+		System.out.println("Producer produced!");
 			
 		// Will alert the Consumer to consume
 		notify();
+		
+		// Producer Thread Sleeps
+		Thread.sleep(100);
 	}
 	
 }
