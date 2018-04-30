@@ -15,12 +15,10 @@ public class Driver {
 		//Consumer c = new Consumer();
 		Thread threadC = new Consumer(basket);
 		
-		synchronized(basket) {
-			threadP.start();
-			threadC.start();
+		threadP.start();
+		threadC.start();
 			
-			threadP.join();
-			threadC.join();
-		}
+		threadP.join();
+		threadC.join();
 	}
 }

@@ -24,8 +24,13 @@ public class Consumer extends Thread {
 		while(true) {
 			int howMuchToTake = r.nextInt(MAX_CAP) + 1;
 			
+			// Use of wait command would not work
+			//while ((basket.size() == 0) && (howMuchToTake > basket.size())) 
+				//wait();
+			
 			// Will not take from empty basket
 			if((basket.size() > 0)) {
+				// Will only take if basket has enough resources
 				if(howMuchToTake < basket.size()) {
 					System.out.println("Consumer is trying to take : " + howMuchToTake);
 					// Consumer takes amount from basket
