@@ -2,6 +2,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -379,6 +380,7 @@ public class EvaluationService {
 
 		public int indexOf(T t) {
 
+			/*
 			int first = 0;
 			int last = sortedList.size() - 1;
 
@@ -419,6 +421,7 @@ public class EvaluationService {
 					}
 				}
 			}
+			*/
 
 			// Element not found
 			return -1;
