@@ -1,0 +1,147 @@
+package dao;
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import domain.AccountUsers;
+import domain.AccountUsers_Bank_Acct;
+import domain.Bank_Acct;
+import util.ConnectionUtil;
+
+public class Bank_AcctDaoImpl implements Bank_AcctDao {
+
+	private String filename = "connection.properties";
+	@Override
+	public Bank_Acct getByBAId(int id) {
+
+		Bank_Acct b = null;
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+
+			// use a prepared statement
+			String sql = "SELECT * FROM BANK_ACCT WHERE BANK_ACCT_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				int pId = rs.getInt("BANK_ACCT_ID");
+				int balance = rs.getInt("BANK_ACCT_BALANCE");
+				b = new Bank_Acct(pId, balance);
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return b;
+
+	}
+	
+	
+	@Override
+	public void createBankAcct(int startingBal, int id) {
+		PreparedStatement pstmt = null;
+		int bId = 0;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			// Declare prepared statement
+			// Make new bank account with initial balance
+			String sql = "INSERT INTO BANK_ACCT (BANK_ACCT_BALANCE) VALUES (?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startingBal);
+			pstmt.executeQuery();
+			
+			// Retrieves Primary key of newly made bank account
+			sql = "SELECT MAX(BANK_ACCT_ID) FROM BANK_ACCT";
+			pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				bId = rs.getInt("MAX(BANK_ACCT_ID)");
+			}
+			
+			// Inserts primary keys from account users and bank account to join table to make sure account
+			// is linked with user
+			sql = "INSERT INTO ACCOUNTUSERS_BANK_ACCT VALUES (?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			pstmt.setInt(2, bId);
+			pstmt.executeQuery();
+
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
+	@Override
+	public boolean checkAccountNum(int id) {
+		PreparedStatement pstmt = null;
+		List<Integer> b = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			// Declare prepared statement
+			String sql = "SELECT BANK_ACCT_ID FROM BANK_ACCT WHERE BANK_ACCT_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+
+			// Will only give us results if bank account id exists
+			if (rs.next()) {
+				int bId = rs.getInt("BANK_ACCT_ID");
+				b.add(bId);
+			}
+
+			if (b.size() != 0)
+				return true;
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+
+	@Override
+	public void withdraw(int id, int amount, int modifier) {
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			// Declare prepared statement
+			String sql = "UPDATE BANK_ACCT SET BANK_ACCT_BALANCE = ? WHERE BANK_ACCT_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, amount);
+			pstmt.setInt(2, id);
+			pstmt.executeQuery();
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

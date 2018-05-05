@@ -76,15 +76,110 @@ WHERE HIREDATE BETWEEN TO_DATE('2003-06-01 00:00:00', 'yyyy-mm-dd hh24:mi:ss') A
 
 --2.7 DELETE
 --Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
-DELETE
-FROM CUSTOMER JOIN INVOICE 
-WHERE CUSTOMERID = CUSTOMERID
-WHERE FIRSTNAME='Robert' AND LASTNAME='Walter';
+--Add ON DELETE CASCADE TO INVOICE CUSTOMER_ID
+ALTER TABLE INVOICELINE
+DROP CONSTRAINT FK_INVOICELINEINVOICEID;
+/
 
-SELECT *
+ALTER TABLE INVOICELINE
+ADD CONSTRAINT FK_INVOICELINEINVOICEID
+FOREIGN KEY (INVOICEID) REFERENCES INVOICE(INVOICEID) ON DELETE CASCADE;
+/
+
+ALTER TABLE INVOICE
+DROP CONSTRAINT FK_INVOICECUSTOMERID;
+/
+
+ALTER TABLE INVOICE
+ADD CONSTRAINT FK_INVOICECUSTOMERID
+FOREIGN KEY (CUSTOMERID) REFERENCES CUSTOMER(CUSTOMERID) ON DELETE CASCADE;
+/
+
+DELETE FROM CUSTOMER
+WHERE FIRSTNAME = 'Robert' AND LASTNAME = 'Walter';
+
+--3.1 System Defined Functions
+--Task – Create a function that returns the current time.
+SELECT TOCHAR(SYSDATE CURRENT_TIMESTAMP ;
+--Task – create a function that returns the length of name in MEDIATYPE table
+--****************************************
+
+--3.3 User Defined Scalar Functions
+--Task – Create a function that returns the average price of invoiceline items in the invoiceline table
+CREATE OR REPLACE FUNCTION RET_AVG_PRICE
+RETURNS FLOAT
+AS
+BEGIN
+    DECLARE AVG_ FLOAT
+    SELECT AVG_ = AVG(UNITPRICE)
+    FROM INVOICELINE;
+    RETURN AVG_;
+END;
+/
+DECLARE 
+AVG_ NUMBER;
+BEGIN
+    AVG_ := RET_AVG_PRICE(FIRST_NUM, SECOND_NUM);
+    DBMS_OUTPUT.PUT_LINE('MAX: '||AVG_);
+END;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--7.1 INNER 
+--Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
+SELECT CUSTOMER.FIRSTNAME, CUSTOMER.LASTNAME ,CUSTOMER.CUSTOMERID, INVOICE.INVOICEID
 FROM CUSTOMER
-WHERE FIRSTNAME='Robert' AND CUSTOMERID;
+INNER JOIN INVOICE ON CUSTOMER.CUSTOMERID = INVOICE.CUSTOMERID;
+
+--7.2 OUTER
+--Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, lastname, invoiceId, and total.
+SELECT CUSTOMER.CUSTOMERID, CUSTOMER.FIRSTNAME, CUSTOMER.LASTNAME , INVOICE.INVOICEID, INVOICE.TOTAL
+FROM CUSTOMER
+FULL OUTER JOIN INVOICE ON CUSTOMER.CUSTOMERID = INVOICE.CUSTOMERID;
+
+--7.3 RIGHT
+--Task – Create a right join that joins album and artist specifying artist name and title.
+SELECT ARTIST.NAME, ALBUM.TITLE
+FROM ALBUM
+RIGHT OUTER JOIN ARTIST ON ARTIST.ARTISTID = ALBUM.ARTISTID;
+
+--7.4 CROSS
+--Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
 SELECT *
-FROM INVOICE;
+FROM ALBUM
+CROSS JOIN ARTIST
+ORDER BY ARTIST.NAME ASC;
+
+--7.5 SELF
+--Task – Perform a self-join on the employee table, joining on the reportsto column.
+SELECT A.EMPLOYEEID, A.FIRSTNAME, A.LASTNAME, B.REPORTSTO
+FROM EMPLOYEE A, EMPLOYEE B
+WHERE A.REPORTSTO = B.REPORTSTO
+ORDER BY B.REPORTSTO;
+
+
+
+
+
+
+
+
+
 
 
