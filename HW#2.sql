@@ -184,9 +184,28 @@ BEGIN
 END;
 /
 
---4.0 Stored Procedures
---In this section you will be creating and executing stored procedures. You will be creating various types of stored procedures that take input and output parameters.
+--4.1 Basic Stored Procedure
+--Task – Create a stored procedure that selects the first and last names of all the employees.
+CREATE OR REPLACE PROCEDURE REC_EMP( S OUT SYS_REFCURSOR)
+IS 
+BEGIN
+    OPEN S FOR 
+    SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE;
+END;
 
+DECLARE 
+S SYS_REFCURSOR ;
+FIRST_N EMPLOYEE.FIRSTNAME%TYPE;
+LAST_N EMPLOYEE.LASTNAME%TYPE;
+BEGIN
+    REC_EMP(S);
+    LOOP
+        FETCH S INTO FIRST_N, LAST_N;
+        EXIT WHEN S%NOTFOUND; --BREAK OUT OF LOOP WHEN NO MORE ROWS ARE AVAILABLE 
+        DBMS_OUTPUT.PUT_LINE(FIRST_N||' '||LAST_N);
+    END LOOP;
+    CLOSE S;
+END;
 
 
 
