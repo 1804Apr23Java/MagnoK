@@ -152,40 +152,34 @@ END;
 
 SELECT MOST_EXP FROM DUAL;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 --3.3 User Defined Scalar Functions
 --Task – Create a function that returns the average price of invoiceline items in the invoiceline table
 CREATE OR REPLACE FUNCTION RET_AVG_PRICE
-RETURNS FLOAT
-AS
+RETURN NUMBER
+IS
+AVG_ NUMBER;
 BEGIN
-    DECLARE AVG_ FLOAT
-    SELECT AVG_ = AVG(UNITPRICE)
-    FROM INVOICELINE;
+    SELECT AVG(UNITPRICE) INTO AVG_ FROM INVOICELINE;
     RETURN AVG_;
 END;
 /
-DECLARE 
+
+SELECT RET_AVG_PRICE FROM DUAL;
+
+--3.4 User Defined Table Valued Functions
+--Task – Create a function that returns all employees who are born after 1968.
+
+
+CREATE OR REPLACE FUNCTION RET_AVG_PRICE
+RETURN NUMBER
+IS
 AVG_ NUMBER;
 BEGIN
-    AVG_ := RET_AVG_PRICE(FIRST_NUM, SECOND_NUM);
-    DBMS_OUTPUT.PUT_LINE('MAX: '||AVG_);
+    SELECT AVG(UNITPRICE) INTO AVG_ FROM INVOICELINE;
+    RETURN AVG_;
 END;
+/
+
 
 
 
