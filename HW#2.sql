@@ -168,17 +168,24 @@ SELECT RET_AVG_PRICE FROM DUAL;
 
 --3.4 User Defined Table Valued Functions
 --Task – Create a function that returns all employees who are born after 1968.
+CREATE TABLE EMPLOYEE (
+    EMPLOYEE_F_NAME VARCHAR(25),
+    EMPLOYEE_L_NAME VARCHAR(25),
+    EMPLOYEE_BDAY DATE,
+);
+/
 
-
-CREATE OR REPLACE FUNCTION RET_AVG_PRICE
-RETURN NUMBER
+CREATE OR REPLACE FUNCTION EMPLOYEE_TABLE
+RETURN TABLE
 IS
-AVG_ NUMBER;
 BEGIN
-    SELECT AVG(UNITPRICE) INTO AVG_ FROM INVOICELINE;
-    RETURN AVG_;
+    FOR I (SELECT LASTNAME, FIRSTNAME, BIRTHDATE) FROM EMPLOYEE WHERE BIRTHDATE > '01-JAN-68') LOOP
+    INTO EMPLOYEE...
 END;
 /
+
+--4.0 Stored Procedures
+--In this section you will be creating and executing stored procedures. You will be creating various types of stored procedures that take input and output parameters.
 
 
 
