@@ -8,6 +8,8 @@ import dao.AccountUsers_Bank_AcctDao;
 import dao.AccountUsers_Bank_AcctDaoImpl;
 import dao.Bank_AcctDao;
 import dao.Bank_AcctDaoImpl;
+import dao.TransactionsDao;
+import dao.TransactionsDaoImpl;
 import domain.AccountUsers;
 import domain.Bank_Acct;
 
@@ -17,6 +19,7 @@ public class Bank {
 	AccountUsers_Bank_AcctDao aba = new AccountUsers_Bank_AcctDaoImpl();
 	AccountUsersDao ac = new AccountUsersDaoImpl();
 	Bank_AcctDao b = new Bank_AcctDaoImpl();
+	TransactionsDao t = new TransactionsDaoImpl();
 	Bank_Acct ba;
 	String userName;
 	int userId;
@@ -30,11 +33,11 @@ public class Bank {
 		a = ac.getAUByUsername(user);
 		userId = a.getId();
 		if(aba.checkAccount(userId)) {
-			chooseAccount();
+			accountDisplay();
 		} else {
-			System.out.println("Account doesn't exists for username!");
+			System.out.println("Account doesn't exist for username!");
 			createBankAccount();
-			chooseAccount();
+			accountDisplay();
 		}
 	}
 	
@@ -54,10 +57,12 @@ public class Bank {
 				System.out.println("Creating Bank Account...");
 				b.createBankAcct(funds, userId);
 				System.out.println("Bank Account has been created!");
+				accountDisplay();
 				
 				// ERROR CHECK FOR WRONG INPUT (negative funds, wrong characters)
 				
-			} else if (sc.equals("exit")) {
+			} 
+			if (sc.equals("exit")) {
 				System.out.println("Have a nice day!");
 				System.exit(0);
 			} else
@@ -75,12 +80,13 @@ public class Bank {
 			// Checks if input is valid
 			if(choice == (int)choice) {
 				System.out.println("Checking Bank Account Number " +choice+ "...");
-				if(b.checkAccountNum(choice)) {
+				if(b.checkAccountNum(choice, userId)) {
 					System.out.println("Bank Account Confirmed!");
 					// Pass in bank account info
 					System.out.println("Loading Bank Account Options...");
 					bankAccountOptions(ba = b.getByBAId(choice));
-				}
+				} else
+					System.out.println("Access denied! Make sure you are entering the correct account number!");
 			}
 			
 			// ERROR CHECK FOR WRONG INPUT
@@ -130,21 +136,57 @@ public class Bank {
 	}
 
 	public void viewTransaction() {
-		//Prints out bank's transactions 
-		
+		// Passing in bank account ID
+		System.out.println("Processing your transactions! Please wait!...");
+		t.printTransactions(ba.getId());
 	}
 
 	public void deleteAccount() {
-		System.out.println("Are you sure you want to delete your account?");
-		//Delete account in SQL
-		accountDisplay();
+		while(true) {
+			System.out.println("Are you sure you want to delete your account?\n"
+					         + "Enter yes to confirm or\n"
+					         + "Enter no to return to options menu");
+			String sc = s.nextLine();
+			sc.toLowerCase();
+			if(sc.equals("yes")) {
+				//Delete account in SQL
+				System.out.println("Deleting your bank account! Please wait...");
+				b.deleteBankAcct(ba.getId());
+				accountDisplay();
+				break;
+			} else if (sc.equals("no")) {
+				// Return to options menu
+				bankAccountOptions(ba);
+				break;
+			} else
+				System.out.println("Invalid Input! Please try again..."); 
+		}
 	}
 
 	public void deposit() {
-		viewBalance();
-		System.out.println("Please enter the amount you wish to deposit:");
-		int amount = s.nextInt();
-		// Add amount to bank account
+		while(true) {
+			viewBalance();
+			System.out.println("Please enter the amount you wish to deposit:");
+			int amount = s.nextInt();
+			
+			
+			// Check if amount is valid
+			// ERROR CHECK
+			
+			
+			if(amount > 0) {			
+				// Update Bank Account for deposited funds
+				System.out.println("Amount accepted. Processing your deposit...");
+				b.deposit(ba.getId(), ba.getBalance() + amount, amount);
+				System.out.println("Transaction Completed! Updating your account...");
+				// Update bank account
+				ba = b.getByBAId(ba.getId());
+				// Show user updated balance
+				viewBalance();
+				break;
+			} else
+				System.out.println("Invalid entry! Please try again.");
+		}
 	}
 
 	public void withdrawal() {
@@ -152,7 +194,6 @@ public class Bank {
 			viewBalance();
 			System.out.println("Please enter the amount you wish to withdraw:");
 			int amount = s.nextInt();
-			int modifier = amount;
 			
 			
 			// Check if amount is valid
@@ -163,7 +204,11 @@ public class Bank {
 				// Update Bank Account for withdrawn funds
 				System.out.println("Amount accepted. Processing your withdrawl...");
 				b.withdraw(ba.getId(), ba.getBalance() - amount, amount);
-				System.out.println("Transaction Completed!");
+				System.out.println("Transaction Completed! Updating your account!");
+				// Update bank account
+				ba = b.getByBAId(ba.getId());
+				// Show user updated balance
+				viewBalance();
 				break;
 			} else
 				System.out.println("Insufficient Funds! Please try again...");
@@ -175,26 +220,23 @@ public class Bank {
 		System.out.println("Balance : $" + amount);
 	}
 
-	public void createAccount() {
-		// Add account to SQL
-		System.out.println("Account Created!");
-		accountDisplay();
-	}
-
 	public void accountDisplay() {
-		System.out.println("Enter 1-for choosing existing account\n"
-				+ "Enter 2-for creating an account\n"
-				+ "Enter 3-to exit");
-		int choice = s.nextInt();
-		if(choice == 1) {
-			chooseAccount();
-		}
-		if(choice==2) {
-			createAccount();
-		}
-		if(choice==3) {
-			System.out.println("Thanks, have a nice day!");
-			System.exit(0);
+		while(true) {
+			System.out.println("Enter 1-for choosing existing account\n"
+					+ "Enter 2-for creating an account\n"
+					+ "Enter 3-to exit");
+			int choice = s.nextInt();
+			if(choice == 1) {
+				chooseAccount();
+				break;
+			}  else if(choice==2) {
+				createBankAccount();
+				break;
+			}  else if(choice==3) {
+				System.out.println("Thanks, have a nice day!");
+				System.exit(0);
+			} else
+				System.out.println("Invalid choice! Please try again!");
 		}
 	}
 }

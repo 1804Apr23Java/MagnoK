@@ -86,6 +86,8 @@ ADD CONSTRAINT FK_INVOICELINEINVOICEID
 FOREIGN KEY (INVOICEID) REFERENCES INVOICE(INVOICEID) ON DELETE CASCADE;
 /
 
+FK_BANK_ACCT_BANK_ACCT_TRANS
+
 ALTER TABLE INVOICE
 DROP CONSTRAINT FK_INVOICECUSTOMERID;
 /
@@ -100,7 +102,7 @@ WHERE FIRSTNAME = 'Robert' AND LASTNAME = 'Walter';
 
 --3.1 System Defined Functions
 --Task – Create a function that returns the current time.
-SELECT TOCHAR(SYSDATE CURRENT_TIMESTAMP ;
+SELECT (SYSDATE CURRENT_TIMESTAMP ;
 --Task – create a function that returns the length of name in MEDIATYPE table
 --****************************************
 
