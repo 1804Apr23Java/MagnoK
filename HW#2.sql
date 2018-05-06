@@ -102,9 +102,36 @@ WHERE FIRSTNAME = 'Robert' AND LASTNAME = 'Walter';
 
 --3.1 System Defined Functions
 --Task – Create a function that returns the current time.
-SELECT (SYSDATE CURRENT_TIMESTAMP ;
+CREATE OR REPLACE FUNCTION RET_CURRENT_TIME
+RETURN TIMESTAMP  
+IS
+T TIMESTAMP;
+BEGIN
+ SELECT CURRENT_TIMESTAMP(8)+0 INTO T FROM DUAL;
+ RETURN T;
+END;
+SELECT RET_CURRENT_TIME FROM DUAL;
 --Task – create a function that returns the length of name in MEDIATYPE table
---****************************************
+CREATE OR REPLACE FUNCTION MEDIATABLE_LENGTH(NAME_ IN VARCHAR)
+RETURN NUMBER
+IS
+L NUMBER;
+BEGIN
+    L := LENGTH(NAME_);
+    RETURN L;
+END;
+
+DECLARE
+NAME_ VARCHAR(70);
+BEGIN
+    SELECT NAME INTO NAME_ FROM MEDIATYPE WHERE MEDIATYPEID = 2;
+    DBMS_OUTPUT.PUT_LINE('Length of "' || NAME_ || '" is: ' || MEDIATABLE_LENGTH(NAME_) || ' characters');
+END;
+
+--3.2 System Defined Aggregate Functions
+--Task – Create a function that returns the average total of all invoices 
+--Task – Create a function that returns the most expensive track
+
 
 --3.3 User Defined Scalar Functions
 --Task – Create a function that returns the average price of invoiceline items in the invoiceline table
