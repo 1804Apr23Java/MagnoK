@@ -44,7 +44,7 @@ public class Transactions {
 	@Override
 	public String toString() {
 		//return "Transactions [id=" + id + ", time=" + time + ", type=" + type + ", modifier=" + modifier + "]";
-		return "Time:\t" + time + "\t" + type + "\t" + "$" + modifier;
+		return "Time:\t" + time + "\t" + type + " \t" + "$" + modifier;
 	}
 	
 	

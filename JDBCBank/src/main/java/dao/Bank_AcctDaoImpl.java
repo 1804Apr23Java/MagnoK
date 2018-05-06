@@ -145,7 +145,7 @@ public class Bank_AcctDaoImpl implements Bank_AcctDao {
 			
 			// Make a new transaction record and associate with bank account
 			sql = "INSERT INTO TRANSACTIONS (TRANSACTIONS_TIME, TRANSACTIONS_TYPE, TRANSACTIONS_MODIFIER) "
-			    + "VALUES (TO_DATE(CURRENT_TIMESTAMP(8)+1),'withdraw',?)";
+			    + "VALUES (TO_DATE(CURRENT_TIMESTAMP(8)+0),'withdraw',?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, modifier);
 			pstmt.executeQuery();

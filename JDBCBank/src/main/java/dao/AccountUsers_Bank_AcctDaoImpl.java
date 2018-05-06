@@ -61,7 +61,7 @@ public class AccountUsers_Bank_AcctDaoImpl implements AccountUsers_Bank_AcctDao 
 			ResultSet rs = pstmt.executeQuery();
 
 			// Will only give us one record usernames are unique
-			if (rs.next()) {
+			while (rs.next()) {
 				int aId = rs.getInt("ACCOUNTUSERS_ID");
 				int bId = rs.getInt("BANK_ACCT_ID");
 				a.add(new AccountUsers_Bank_Acct(aId, bId));
