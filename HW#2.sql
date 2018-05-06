@@ -130,7 +130,42 @@ END;
 
 --3.2 System Defined Aggregate Functions
 --Task – Create a function that returns the average total of all invoices 
+CREATE OR REPLACE FUNCTION AVG_INVOICES
+RETURN NUMBER
+IS
+AVG_ NUMBER;
+BEGIN
+    SELECT AVG(TOTAL) INTO AVG_ FROM INVOICE;
+    RETURN AVG_;
+END;
+
+SELECT AVG_INVOICES FROM DUAL;
 --Task – Create a function that returns the most expensive track
+CREATE OR REPLACE FUNCTION MOST_EXP
+RETURN NUMBER
+IS
+M_EX NUMBER;
+BEGIN
+    SELECT MAX(UNITPRICE) INTO M_EX FROM TRACK;
+    RETURN M_EX;
+END;
+
+SELECT MOST_EXP FROM DUAL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 --3.3 User Defined Scalar Functions
