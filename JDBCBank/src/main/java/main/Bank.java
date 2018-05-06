@@ -1,5 +1,6 @@
 package main;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dao.AccountUsersDao;
@@ -213,19 +214,27 @@ public class Bank {
 	public void accountDisplay() {
 		System.out.println(
 				"Enter 1-for choosing existing account\n" + "Enter 2-for creating an account\n" + "Enter 3-to exit");
-		int choice = s.nextInt();
-		switch (choice) {
-		case 1:
-			chooseAccount();
-			break;
-		case 2:
-			createBankAccount();
-			break;
-		case 3:
-			System.out.println("Thanks, have a nice day!");
-			System.exit(0);
-		default:
-			System.out.println("Invalid choice! Please try again!");
+		try {
+			int choice = s.nextInt();
+			
+			switch (choice) {
+			case 1:
+				chooseAccount();
+				break;
+			case 2:
+				createBankAccount();
+				break;
+			case 3:
+				System.out.println("Thanks, have a nice day!");
+				System.exit(0);
+			default:
+				accountDisplay();
+				System.out.println("Invalid choice! Please try again!");
+			}
+		} catch (InputMismatchException e) {
+			//e.printStackTrace();
+			System.out.println("Invalid Input! Please make sure you are entering the numbers 1-3 ONLY");
+			s.next();
 			accountDisplay();
 		}
 	}
