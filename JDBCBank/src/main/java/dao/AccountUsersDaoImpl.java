@@ -143,7 +143,7 @@ public class AccountUsersDaoImpl implements AccountUsersDao {
 	}
 
 	@Override
-	public List<AccountUsers> superUPrintOutUsers() {
+	public void superUPrintOutUsers() {
 		PreparedStatement pstmt = null;
 		List<AccountUsers> a = new ArrayList<>();
 
@@ -172,7 +172,47 @@ public class AccountUsersDaoImpl implements AccountUsersDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		return a;
+	}
+
+	@Override
+	public void superUGrantAccess(String user) {
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			// Declare prepared statement
+			String sql = "UPDATE ACCOUNTUSERS SET ACCOUNTUSERS_SUPERUSER = 1 WHERE ACCOUNTUSERS_USERNAME = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user);
+			pstmt.executeQuery();
+
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void superUDelete(String user) {
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			// Declare prepared statement
+			String sql = "DELETE FROM ACCOUNTUSERS WHERE ACCOUNTUSERS_USERNAME = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user);
+			pstmt.executeQuery();
+
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

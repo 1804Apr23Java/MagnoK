@@ -9,5 +9,7 @@ public interface AccountUsersDao {
 	public void newUser(String user, String pass);
 	public boolean userExists(String user);
 	public boolean checkPassword(String user, String password);
-	public List<AccountUsers> superUPrintOutUsers();
+	public void superUPrintOutUsers();
+	public void superUGrantAccess(String user);
+	public void superUDelete(String user);
 }

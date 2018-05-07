@@ -102,31 +102,4 @@ public class TransactionsDaoImpl implements TransactionsDao {
 			e.printStackTrace();
 		}
 	}
-
-	@Override
-	public int calcNetIncome(int id) {
-		CallableStatement cs = null;
-		int netIncome = 0;
-
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
-			String sql = "{call CALC_NET_INCOME(?)}";
-			cs = con.prepareCall(sql);
-			cs.setInt(1,id);
-			ResultSet rs = cs.executeQuery();
-
-			if (rs.next()) {
-				netIncome = rs.getInt("CALC_NET_INCOME");
-			}
-
-			con.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return netIncome;
-		
-	}
 }

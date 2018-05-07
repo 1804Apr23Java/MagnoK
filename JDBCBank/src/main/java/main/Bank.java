@@ -33,13 +33,20 @@ public class Bank {
 		AccountUsers a = new AccountUsers();
 		a = ac.getAUByUsername(user);
 		userId = a.getId();
-		if (aba.checkAccount(userId)) {
+		if (checkIfAccountExists(userId)) {
 			accountDisplay();
 		} else {
 			System.out.println("Account doesn't exist for username!");
 			createBankAccount();
 			accountDisplay();
 		}
+	}
+	
+	public boolean checkIfAccountExists(int id) {
+		if(aba.checkAccount(id)) {
+			return true;
+		} else
+			return false;
 	}
 
 	public void createBankAccount() {
@@ -103,7 +110,7 @@ public class Bank {
 			}
 
 			System.out.println("Checking Bank Account Number " + choice + "...");
-			if (b.checkAccountNum(choice, userId)) {
+			if (checkAccountNumber(choice, userId)) {
 				System.out.println("Bank Account Confirmed!");
 				// Pass in bank account info
 				System.out.println("Loading Bank Account Options...");
@@ -114,6 +121,13 @@ public class Bank {
 			// ERROR CHECK FOR WRONG INPUT
 
 		}
+	}
+	
+	public boolean checkAccountNumber(int b_num, int aId) {
+		if(b.checkAccountNum(b_num, aId)) {
+			return true;
+		} else
+			return false;
 	}
 
 	public void bankAccountOptions(Bank_Acct b) {

@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -130,6 +131,7 @@ public class Bank_AcctDaoImpl implements Bank_AcctDao {
 	@Override
 	public void withdraw(int id, int amount, int modifier) {
 		PreparedStatement pstmt = null;
+		CallableStatement cs = null;
 		int tId = 0;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
@@ -139,6 +141,13 @@ public class Bank_AcctDaoImpl implements Bank_AcctDao {
 			pstmt.setInt(1, amount);
 			pstmt.setInt(2, id);
 			pstmt.executeQuery();
+			
+			// Will take a 2 charge for withdrawing
+			System.out.println("Charging $2 processing fee...");
+			sql = "{call TRANSACTION_FEE(?)}";
+			cs = con.prepareCall(sql);
+			cs.setInt(1,id);
+			cs.executeQuery();
 			
 			//Make modifier negative to display correctly on Transactions record
 			modifier *= -1;
