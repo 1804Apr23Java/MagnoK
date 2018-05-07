@@ -3,10 +3,13 @@ package main;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import dao.AccountUsersDao;
 import dao.AccountUsersDaoImpl;
+import domain.AccountUsers;
 
 public class User {
 
@@ -18,8 +21,9 @@ public class User {
 
 	Bank b = new Bank();
 	AccountUsersDao ac = new AccountUsersDaoImpl();
-	
-	//Account Id for the user accessing currently
+	AccountUsers a;
+
+	// Account Id for the user accessing currently
 	String userAccountName;
 
 	public void logIn() {
@@ -34,6 +38,10 @@ public class User {
 		 * if not prompt to create an account if(ifAccountExists) { u.accountDisplay();
 		 * } }
 		 */
+		// Check if user is superuser
+		if (a.isSuperuser()) {
+			superUserMenu();
+		}
 
 		b.initialChooseAccount(userAccountName);
 
@@ -50,12 +58,54 @@ public class User {
 		 */
 	}
 
+	public void superUserMenu() {
+
+		// Will turn true once user wants to proceed with their bank account
+		boolean cont = false;
+		int choice = 0;
+		List<AccountUsers> a;
+
+		System.out.println("SuperUser Detected!");
+		System.out.println("Enter 0 - to continue with program\n" + "Enter 1 - to access list of usernames\n"
+				+ "Enter 2 - to create a username\n" + "Enter 3 - to update a user's accessibility/username/password"
+				+ "Enter 4 - to delete a username");
+
+		try {
+			choice = s.nextInt();
+		} catch (InputMismatchException e) {
+			// e.printStackTrace();
+			System.out.println("Invalid Input! Please make sure you are entering a number!");
+			s.next();
+			superUserMenu();
+		}
+
+		switch (choice) {
+		case 0:
+			System.out.println("Proceeding with program...");
+			b.initialChooseAccount(userAccountName);
+			break;
+		case 1:
+			System.out.println("Processing accounts...");
+			a = ac.superUPrintOutUsers();
+			superUserMenu();
+			break;
+		case 2:
+			createAccount();
+			superUserMenu();
+			break;
+		case 3:
+		case 4:
+		default:
+		}
+	}
+
 	public void createAccount() {
 		String newUser = "";
 		while (true) {
 			// Prompt the user to enter a new username and password
 			System.out.println("Creating new account\n" + "Please input username:");
 			newUser = s.nextLine();
+			System.out.println(newUser);
 			// Check if username exists
 			newUser = newUser.toLowerCase();
 			System.out.println("Checking username... " + newUser);
@@ -81,6 +131,9 @@ public class User {
 
 			user = user.toLowerCase();
 			System.out.println("Checking username... " + user);
+			if (user.length() < 1) {
+				System.out.println("Please enter valid username");
+			}
 			if (user.equals("create")) {
 				createAccount();
 			} else {
@@ -101,7 +154,7 @@ public class User {
 		int failCount = 0;
 
 		while (true) {
-			if(failCount == 3) {
+			if (failCount == 3) {
 				System.out.println("3 failed attempts! Try again later");
 				inputUserName();
 			}
@@ -110,6 +163,7 @@ public class User {
 			System.out.println("Checking password... ");
 			if (ac.checkPassword(user, password)) {
 				System.out.println("Login Success!");
+				a = ac.getAUByUsername(userAccountName);
 				break;
 			} else {
 				System.out.println("Password has failed! Please try again!");

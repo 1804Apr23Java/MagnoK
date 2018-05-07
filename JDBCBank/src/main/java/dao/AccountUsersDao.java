@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import domain.AccountUsers;
 
 public interface AccountUsersDao {
@@ -7,4 +9,5 @@ public interface AccountUsersDao {
 	public void newUser(String user, String pass);
 	public boolean userExists(String user);
 	public boolean checkPassword(String user, String password);
+	public List<AccountUsers> superUPrintOutUsers();
 }

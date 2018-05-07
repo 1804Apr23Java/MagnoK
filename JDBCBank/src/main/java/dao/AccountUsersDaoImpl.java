@@ -141,4 +141,38 @@ public class AccountUsersDaoImpl implements AccountUsersDao {
 
 		return false;
 	}
+
+	@Override
+	public List<AccountUsers> superUPrintOutUsers() {
+		PreparedStatement pstmt = null;
+		List<AccountUsers> a = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			// Declare prepared statement
+			String sql = "SELECT * FROM ACCOUNTUSERS";
+			pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+
+			// Will only give us one record usernames are unique
+			while (rs.next()) {
+				int id = rs.getInt("ACCOUNTUSERS_ID");
+				String user = rs.getString("ACCOUNTUSERS_USERNAME");
+				String pass = rs.getString("ACCOUNTUSERS_PASSWORD");
+				boolean superU = rs.getBoolean("ACCOUNTUSERS_SUPERUSER");
+				a.add(new AccountUsers(id, user, pass, superU));
+			}
+
+			for (int i = 0; i < a.size(); i++)
+				System.out.println(a.get(i));
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
 }
