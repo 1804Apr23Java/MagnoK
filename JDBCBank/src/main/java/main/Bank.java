@@ -168,6 +168,8 @@ public class Bank {
 		// Passing in bank account ID
 		System.out.println("Processing your transactions! Please wait!...");
 		t.printTransactions(ba.getId());
+		//System.out.println("Calculating Net Income! Please wait!...");
+		//System.out.println("Net Income: " + t.calcNetIncome(ba.getId()));
 	}
 
 	public void deleteAccount() {

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.AccountUsers_Bank_Acct;
 import domain.Bank_Acct_Transactions;
 import domain.Transactions;
 import util.ConnectionUtil;
@@ -100,5 +101,32 @@ public class TransactionsDaoImpl implements TransactionsDao {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public int calcNetIncome(int id) {
+		PreparedStatement pstmt = null;
+		int netIncome = 0;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			String sql = "{call CALC_NET_INCOME(?)}";
+			pstmt = con.prepareCall(sql);
+			pstmt.setInt(1,id);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				netIncome = rs.getInt("CALC_NET_INCOME");
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return netIncome;
+		
 	}
 }
