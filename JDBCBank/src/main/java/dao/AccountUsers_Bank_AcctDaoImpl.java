@@ -78,4 +78,34 @@ public class AccountUsers_Bank_AcctDaoImpl implements AccountUsers_Bank_AcctDao 
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void printBankAccountsByProc(int id) {
+		PreparedStatement pstmt = null;
+		List<AccountUsers_Bank_Acct> a = new ArrayList<>();
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+			String sql = "{call PRINT_BANK_ACCTS(S OUT SYS_REFCURSOR,?)}";
+			pstmt = con.prepareCall(sql);
+			pstmt.setInt(1,id);
+			ResultSet rs = pstmt.executeQuery();
+
+			// Will only give us one record usernames are unique
+			while (rs.next()) {
+				int aId = rs.getInt("ACCOUNTUSERS_ID");
+				int bId = rs.getInt("BANK_ACCT_ID");
+				a.add(new AccountUsers_Bank_Acct(aId, bId));
+			}
+
+			for (int i = 0; i < a.size(); i++)
+				System.out.println(a.get(i));
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

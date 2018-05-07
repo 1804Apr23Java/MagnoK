@@ -268,7 +268,41 @@ BEGIN
     CLOSE S;
 END;
 
+--5.0 Transactions
+--Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).
+CREATE OR REPLACE PROCEDURE DEL_INV (INV_ID IN INVOICE.INVOICEID%TYPE)
+IS
+INV_ID_EXISTS INTEGER;
+BEGIN
+    SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+    --CHECK IF INV_ID EXISTS
+    SELECT COUNT(I.INVOICEID) INTO INV_ID_EXISTS FROM INVOICE I
+        WHERE I.INVOICEID = INV_ID;
+    
+    -- CONSTRAINT INTEGRITY
+    IF INV_ID_EXISTS > 0 THEN
+        DELETE FROM INVOICELINE WHERE INVOICEID = INV_ID;
+        DELETE FROM INVOICE WHERE INVOICEID = INV_ID;
+        DBMS_OUTPUT.PUT_LINE('ID: '||INV_ID||' HAS BEEN DELETED');
+    ELSE
+    DBMS_OUTPUT.PUT_LINE('ID: '||INV_ID||' DOES NOT EXIST!');
+    
+    END IF;
+    COMMIT;
+EXCEPTION
+    WHEN OTHERS THEN
+    DBMS_OUTPUT.PUT_LINE('ID: '||INV_ID||' DOES NOT EXIST!');
+    ROLLBACK;
+END;
 
+BEGIN
+    DEL_INV(109);
+END;
+
+--6.1 AFTER/FOR
+--Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+--Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+--Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
 
 
 
