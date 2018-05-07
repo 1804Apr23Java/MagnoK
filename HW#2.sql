@@ -301,24 +301,29 @@ END;
 
 --6.1 AFTER/FOR
 --Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+CREATE OR REPLACE TRIGGER TR_INSERT_EMPLOYEE
+BEFORE INSERT ON EMPLOYEE
+FOR EACH ROW
+BEGIN
+     DBMS_OUTPUT.PUT_LINE('EMPLOYEE HAS BEEN CREATED!');
+END;
+/
 --Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+CREATE OR REPLACE TRIGGER TR_UPDATE_ALBUM
+BEFORE UPDATE ON ALBUM
+FOR EACH ROW
+BEGIN
+     DBMS_OUTPUT.PUT_LINE('ALBUM HAS BEEN UPDATED!');
+END;
+/
 --Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+CREATE OR REPLACE TRIGGER TR_DELETE_CUSTOMER
+BEFORE DELETE ON CUSTOMER
+FOR EACH ROW
+BEGIN
+     DBMS_OUTPUT.PUT_LINE('CUSTOMER HAS BEEN DELETED!');
+END;
+/
 
 --7.1 INNER 
 --Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
