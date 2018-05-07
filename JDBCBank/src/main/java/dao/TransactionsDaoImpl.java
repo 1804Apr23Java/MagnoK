@@ -1,6 +1,7 @@
 package dao;
 
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.AccountUsers_Bank_Acct;
 import domain.Bank_Acct_Transactions;
 import domain.Transactions;
 import util.ConnectionUtil;
@@ -105,14 +105,14 @@ public class TransactionsDaoImpl implements TransactionsDao {
 
 	@Override
 	public int calcNetIncome(int id) {
-		PreparedStatement pstmt = null;
+		CallableStatement cs = null;
 		int netIncome = 0;
 
 		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
 			String sql = "{call CALC_NET_INCOME(?)}";
-			pstmt = con.prepareCall(sql);
-			pstmt.setInt(1,id);
-			ResultSet rs = pstmt.executeQuery();
+			cs = con.prepareCall(sql);
+			cs.setInt(1,id);
+			ResultSet rs = cs.executeQuery();
 
 			if (rs.next()) {
 				netIncome = rs.getInt("CALC_NET_INCOME");
