@@ -17,12 +17,15 @@ import domain.Bank_Acct;
 public class Bank {
 
 	Scanner s = new Scanner(System.in);
+	
 	AccountUsers_Bank_AcctDao aba = new AccountUsers_Bank_AcctDaoImpl();
 	AccountUsersDao ac = new AccountUsersDaoImpl();
 	Bank_AcctDao b = new Bank_AcctDaoImpl();
 	TransactionsDao t = new TransactionsDaoImpl();
+	
 	Bank_Acct ba;
 	String userName;
+	
 	int userId;
 
 	public void initialChooseAccount(String user) {
@@ -182,8 +185,6 @@ public class Bank {
 		// Passing in bank account ID
 		System.out.println("Processing your transactions! Please wait!...");
 		t.printTransactions(ba.getId());
-		//System.out.println("Calculating Net Income! Please wait!...");
-		//System.out.println("Net Income: " + t.calcNetIncome(ba.getId()));
 	}
 
 	public void deleteAccount() {
@@ -264,6 +265,9 @@ public class Bank {
 			ba = b.getByBAId(ba.getId());
 			// Show user updated balance
 			viewBalance();
+		} else if (amount < 0) {
+			System.out.println("Invalid amount! Please try again!");
+			withdrawal();
 		} else {
 			System.out.println("Insufficient Funds! Please try again...");
 			withdrawal();

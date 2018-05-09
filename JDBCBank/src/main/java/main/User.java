@@ -14,10 +14,6 @@ import domain.AccountUsers;
 public class User {
 
 	Scanner s = new Scanner(System.in);
-	// Super User and Database Info
-	boolean superuser = false;
-	String[] properties = new String[3];
-	String databaseInfo = "Working!";
 
 	Bank b = new Bank();
 	AccountUsersDao ac = new AccountUsersDaoImpl();
@@ -44,8 +40,6 @@ public class User {
 
 	public void superUserMenu() {
 
-		// Will turn true once user wants to proceed with their bank account
-		boolean cont = false;
 		int choice = 0;
 
 		System.out.println("SuperUser Detected!");

@@ -19,8 +19,8 @@ public class Bank_AcctDaoImplTests {
 	@Test
 	public void CheckForCorrectAccountReturn () {
 		
-		Bank_Acct kevin = new Bank_Acct(24, 89756);
-		Bank_Acct tad = new Bank_Acct(23, 19998);
+		Bank_Acct kevin = new Bank_Acct(24, 87754);
+		Bank_Acct tad = new Bank_Acct(23, 19990);
 		
 		assertEquals(kevin.getBalance(), b.getByBAId(24).getBalance());
 

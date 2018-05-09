@@ -1,0 +1,72 @@
+body {
+    background-color: #70b8bd;
+}
+
+.home {
+    text-align: center;
+    color: white;
+    background-color: #70b8bd;
+ }
+
+#hemingwayCat {
+    display:block;
+    padding:40px;
+    margin:40px;
+    border-style:solid;
+    border-color:#67732a;
+    border-width:10px;
+}
+
+.bobRoss {
+    background-image:url("https://media.npr.org/assets/img/2016/08/22/bobearly1_wide-f0fae2126b4eec1ce1ee0e4e61223fbd1756f617.jpg?s=1400");
+}
+
+.myCoolForm {
+    padding:40px;
+    margin:40px;
+    border-style:solid;
+    border-color:#67732a;
+}
+
+.navCities {
+    padding-left: 0mm;
+    padding-right: 70em;
+    background-color: black;
+
+}
+ 
+ /* Links inside the navbar */
+ .navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+ }
+ 
+ /* Change background on mouse-over */
+ .navbar a:hover {
+    background: #ddd;
+    color: black;
+ }
+ 
+ /* Main content */
+ .main {
+    margin-top: 30px; /* Add a top margin to avoid content overlay */
+ }
+
+ .container {
+    position: relative;
+ }
+ 
+ /* Bottom right text */
+ .text-block {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+ }
