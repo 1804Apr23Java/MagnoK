@@ -28,29 +28,27 @@ Don't use the Array sort() method... that would be lame.
     * /
 
 homework.sort = function (array) {
-    var sorted = [];
-    var len = array.length;
-    var temp
+    var sorted = true;
+    var temp;
 
     // Bubble Sort
     while (true) {
-        sorted = array;
-        for (i = 0; i < len; i++) {
-            if (array[i] < array[i + 1]) {
-                //Stays in the same spot
-            } else {
+        for (i = 0; i < array.length; i++) {
+            if (array[i] > array[i + 1]) {
                 //Swap
-                array[i] = temp;
+                temp = array[i];
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
-            }
+                sorted = false;
+            } 
+            // Stay in same spot otherwise
         }
         // Will only break out of loop once the array is sorted
-        if (array = sorted) {
+        if (sorted) {
             break;
         }
+        sorted = true;
     }
-    console.log(array);
     return array;
 };
 
@@ -114,7 +112,7 @@ The following are balanced brackets:
 ()
     ()()
     (())
-    ({ []})
+    ({[]})
 
 The following are NOT balanced brackets:
 (
@@ -183,7 +181,6 @@ homework.balancedBrackets = function (bracketsString) {
     // Check for nested brackets
     // Will be filled with distance for farthest pair
     var dist = 3 + (2 * (pairs-1));
-    console.log(dist);
     for (var k = 0; k < bracketsString.length; k++) {
         // Skips over checked pairs
         if (pArr.includes(k)) {
@@ -212,19 +209,13 @@ homework.balancedBrackets = function (bracketsString) {
             default:
         }
 
-        if (k + dist > bracketsString.length) { break; }
-
         if (pairs == 0) {
-            break;
+            return true;
         }
     }
 
-    // Will only return true once all pairs are identified
-    if (pairs == 0) {
-        return true;
-    } else {
-        return false;
-    }
+    // If there are pairs left it will return false
+    return false;
 };
 
 
