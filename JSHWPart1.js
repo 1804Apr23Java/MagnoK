@@ -111,10 +111,10 @@ homework.rotateLeft = function (array, n) {
 A bracket is any one of the following: (, ), {, }, [, or]
 
 The following are balanced brackets:
-     ()
+()
     ()()
     (())
-    ({[]})
+    ({ []})
 
 The following are NOT balanced brackets:
 (
@@ -131,61 +131,99 @@ homework.balancedBrackets = function (bracketsString) {
         return false;
     }
 
-    var len = bracketsString.length;
-    var i;
-    var arr = bracketsString.split("");
+    // Will store indicies of pairs
+    var pArr = [];
+
     // Will identify number of pairs
-    var pairs = arr.length/2;
+    var pairs = bracketsString.length / 2;
 
-    // Will be filled with distance from middle pair
-    var dist = 1;
-
-    console.log(arr);
-    console.log(pairs);
-
-    for (i = 0; i < arr.length; i++) {
+    for (var i = 0; i < bracketsString.length; i++) {
         // If anything else besides a bracket appears it will return false
-        switch (arr[i]) {
+        switch (bracketsString.charAt(i)) {
             case '(':
+                // Match pairs that are next to each other
+                if (bracketsString.charAt(i + 1) == ')') {
+                    pairs -= 1;
+                    pArr += i;
+                    pArr += i + 1;
+                }
                 break;
             case ')':
                 break;
             case '[':
+                // Match pairs that are next to each other
+                if (bracketsString.charAt(i + 1) == ']') {
+                    pairs -= 1;
+                    pArr += i;
+                    pArr += i + 1;
+                }
                 break;
             case ']':
                 break;
             case '{':
+                // Match pairs that are next to each other
+                if (bracketsString.charAt(i + 1) == '}') {
+                    pairs -= 1;
+                    pArr += i;
+                    pArr += i + 1;
+                }
                 break;
             case '}':
                 break;
             default:
                 return false;
         }
-
-        //
-
-        // Multiple grouped brackets
-        if (bracketsString.charAt(i) == bracketsString.charAt(i + 1)) {
-            // Check pairs if they match
-            for (var j = 0; j < i + 1; j++) {
-                if (bracketsString.charAt(i - dist) != bracketsString.charAt(i + dist + 1)) {
-                    return false;
-                }
-                dist++;
-            }
-            // Will only return true if all pairs match
-            return true;
-        }
-
-        // If there are no balanced brackets
-        return false;
     }
 
     // Will only return true once all pairs are identified
-    if(pairs != 0) {
-        return false;
-    } else {
+    if (pairs == 0) {
         return true;
+    }
+
+    // Check for nested brackets
+    // Will be filled with distance for farthest pair
+    var dist = 3 + (2 * (pairs-1));
+    console.log(dist);
+    for (var k = 0; k < bracketsString.length; k++) {
+        // Skips over checked pairs
+        if (pArr.includes(k)) {
+            continue;
+        }
+
+        switch (bracketsString.charAt(k)) {
+            case '(':
+                if (bracketsString.charAt(k + dist) == ')') {
+                    pairs -= 1;
+                    dist -= 2;
+                } else { return false; }
+                break;
+            case '[':
+                if (bracketsString.charAt(k + dist) == ']') {
+                    pairs -= 1;
+                    dist -= 2;
+                } else { return false; }
+                break;
+            case '{':
+                if (bracketsString.charAt(k + dist) == '}') {
+                    pairs -= 1;
+                    dist -= 2;
+                } else { return false; }
+                break;
+            default:
+        }
+
+        if (k + dist > bracketsString.length) { break; }
+
+        if (pairs == 0) {
+            break;
+        }
+    }
+
+    // Will only return true once all pairs are identified
+    if (pairs == 0) {
+        return true;
+    } else {
+        return false;
     }
 };
 
