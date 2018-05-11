@@ -58,8 +58,31 @@
             <label for="exampleFormControlTextarea1">Suggest a City!</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" id="submit">Submit</button>
     </form>
+   
+    <br>
+
+    <div class="comment">
+        <h6>Suggested Cties</h6>
+        <div class="comment" id="suggestedCities"></div>
+    </div>
+
+    <br>
+
+
+    <p>
+        <input type="text" value="abc"> (text)</p>
+    <p>
+        <input type="password" value="abc"> (password)</p>
+    <p>
+        <input type="checkbox" checked> (checkbox)</p>
+    <p>
+        <input type="radio" value="A" name="choice">
+        <input type="radio" value="B" name="choice">
+        <input type="radio" value="C" name="choice" checked> (radio)</p>
+    <p>
+        <input type="file" checked> (file)</p>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -67,6 +90,9 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+    <!--Add event listener-->
+    <script src="scripts/getFormInfo.js"></script>
 
 </body>
 
