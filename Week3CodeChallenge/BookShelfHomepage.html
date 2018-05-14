@@ -1,0 +1,82 @@
+<!DOCTYPE HTML/>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <title>Bookshelf</title>
+
+    <link rel="stylesheet" href="BookshelfTheme.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1 align="center">Motivational Books</h1>
+
+    <!--Bootstrap Carousel-->
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <a href="Relentless.html">
+                    <img class="d-block w-100" src="images/Relentless.png" alt="Relentless by Tim S. Grover" width="50%" height="100%" border="5"
+                        class="center"> </a>
+            </div>
+            <div class="carousel-item">
+                <a href="TheMagic.html">
+                    <img class="d-block w-100" src="images/TheMagic.jpg" alt="The Magic of Thinking Big by David J Schwartz" width="50%" height="auto"
+                        border="5 " class="center "> </a>
+            </div>
+            <div class="carousel-item ">
+                <a href="TheObstacle.html">
+                    <img class="d-block w-100 " src="images/The Obstacle is the way.jpg " alt="The Obstacle is the Way
+                        by Ryan Holliday " width="50% " height="auto " border="5 " class="center "> </a>
+            </div>
+        </div>
+        <a class="carousel-control-prev " href="#carouselExampleControls " role="button " data-slide="prev ">
+            <span class="carousel-control-prev-icon " aria-hidden="true "></span>
+            <span class="sr-only ">Previous</span>
+        </a>
+        <a class="carousel-control-next " href="#carouselExampleControls " role="button " data-slide="next ">
+            <span class="carousel-control-next-icon " aria-hidden="true "></span>
+            <span class="sr-only ">Next</span>
+        </a>
+    </div>
+
+    <br>
+
+    <form class="comment-form ">
+        <div class="form-group ">
+            <label for="exampleFormControlInput1 ">Email address</label>
+            <input type="email " class="form-control " id="emailInput" placeholder="name@example.com ">
+        </div>
+
+        <div class="form-group ">
+            <label for="exampleFormControlTextarea1 ">Suggest a Book!</label>
+            <textarea class="form-control " id="commentInput" rows="3 "></textarea>
+        </div>
+        <button type="submit " class="btn btn-primary " id="submitButton" value="Enter ">Submit</button>
+    </form>
+
+    <br>
+
+    <div class="comment">
+            <h6>Added Books!!</h6>
+            <div class="comment " id="suggestedCities"></div>
+    </div>
+
+    <br>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q "
+        crossorigin="anonymous "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl "
+        crossorigin="anonymous "></script>
+
+    <!--Add event listener-->
+    <script src="scripts/bookshelf.js "></script>
+
+</body>
+
+</html>
