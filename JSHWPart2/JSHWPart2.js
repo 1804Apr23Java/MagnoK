@@ -1,3 +1,21 @@
+// All functions in HW
+window.onload = function () {
+    //getUSA();
+    //getPeopleInSales();
+    //getAnchorChildren();
+    //getHobbies();
+    //getCustomAttribute();
+    //getSum();
+    //alertUserSkill();
+    //favoriteColor();
+    //employeeHover();
+    //currentTimeFunc();
+    //delayHelloWorld();
+    //walkTheDOM(this.document.getElementsByTagName("html")[0], func);
+    //Will display nodes traversed
+    //console.log(n);
+}
+
 // 1. USA
 // Define function getUSA()
 
@@ -278,7 +296,7 @@ function delayHelloWorld() {
 
     h.addEventListener("click", function () {
         //  Waits 3 seconds
-        setTimeout(function() {
+        setTimeout(function () {
             h.style.color = randomColor();
         }, 3000);
     });
@@ -293,29 +311,25 @@ function delayHelloWorld() {
 
 // On each node, call func(node).
 
+// Will store nodes traversed
+var n = [];
+var count = 0;
+
 function walkTheDOM(node, func) {
-    //var dom = document.getElementsByTagName("*");
-    var dom = document.querySelectorAll("*");
-    for(var i = 0; i < dom.length; i++) {
-        console.log(dom[i].value);
+    var kids = node.children;
+
+    if (kids != null) {
+        for (var i = 0; i < kids.length; i++) {
+            n[count] = kids[i].tagName;
+            count++
+            walkTheDOM(kids[i], func);
+        }
     }
 };
 
 
-
-window.onload = function () {
-    //getUSA();
-    //getPeopleInSales();
-    //getAnchorChildren();
-    //getHobbies();
-    //getCustomAttribute();
-    //getSum();
-    //alertUserSkill();
-    //favoriteColor();
-    //employeeHover();
-    //currentTimeFunc();
-    //delayHelloWorld();
-    walkTheDOM();
+// Filler function for #12
+function func(node) {
 }
 
 // Extra functions
