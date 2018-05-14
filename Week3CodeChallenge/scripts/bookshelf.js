@@ -11,10 +11,13 @@ function addNewBookList(event) {
         "email": document.getElementById('emailInput').value,
         "book": document.getElementById('bookInput').value
     }
-    var info = document.createTextNode(newBook.book);
+
+    var bInfo = newBook.email + " " + newBook.book;
+
+    var info = document.createTextNode(bInfo);
     // Add book to 
     node.appendChild(info);
-    document.getElementById("newBooks").appendChild(node);
+    document.getElementById("newBooksList").appendChild(node);
 }
 
 function addNewBook(event) {
