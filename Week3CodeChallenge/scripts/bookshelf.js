@@ -1,15 +1,15 @@
 window.onload = function () {
     var commentForm = document.getElementById("submitButton");
-    commentForm.addEventListener("click", addNewComment);
+    commentForm.addEventListener("click", addNewBook);
 };
 
-function addNewComment(event) {
+function addNewBook(event) {
     event.preventDefault();
-    var newComment = {
+    var newBook = {
         "email": document.getElementById('emailInput').value,
-        "comment": document.getElementById('commentInput').value
+        "book": document.getElementById('bookInput').value
     }
-    document.getElementById("suggestedCities").innerHTML = newComment.email + ":     " + newComment.comment;
+    document.getElementById("newBooks").innerHTML = newBook.email + ":     " + newBook.book;
 
     console.log(newComment);
 }
