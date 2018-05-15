@@ -1,0 +1,59 @@
+.body {
+    background-color: #9bdadf;
+}
+
+.p {
+    text-align: left;
+    margin-left: 400px;
+    font-size: 25px;
+}
+
+.home {
+    text-align: center;
+    color: white;
+    background-color: #70b8bd;
+ }
+
+.navCities {
+    padding-left: 0mm;
+    padding-right: 70em;
+    background-color: black;
+}
+ 
+ /* Links inside the navbar */
+ .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    background: black;
+ }
+ 
+ /* Change background on mouse-over */
+ .navbar a:hover {
+    background:white;
+    color: black;
+ }
+ 
+ /* Main content */
+ .main {
+    margin-top: 30px; /* Add a top margin to avoid content overlay */
+ }
+
+ .container {
+    position: center;
+ }
+ 
+ /* Bottom right text */
+ .text-block {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+ }

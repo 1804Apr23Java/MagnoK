@@ -15,7 +15,7 @@ function addNewBookList(event) {
     var bInfo = newBook.email + " " + newBook.book;
 
     var info = document.createTextNode(bInfo);
-    // Add book to 
+    // Add book to list
     node.appendChild(info);
     document.getElementById("newBooksList").appendChild(node);
 }

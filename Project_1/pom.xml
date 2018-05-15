@@ -3,4 +3,5 @@
   <groupId>Project_1</groupId>
   <artifactId>Project_1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
 </project>
