@@ -12,14 +12,12 @@ import util.ConnectionUtil;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
-	private String filename = "connection.properties";
-
 	public boolean checkPassword(String user, String password) {
 		PreparedStatement pstmt = null;
 		String name = "";
 		String pass = "";
 
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 			// Declare prepared statement
 			String sql = "SELECT EMPLOYEE_USERNAME, EMPLOYEE_PASSWORD FROM EMPLOYEE WHERE EMPLOYEE_USERNAME = ?";
 			pstmt = con.prepareStatement(sql);
@@ -52,7 +50,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Employee emp = null;
 		PreparedStatement pstmt = null;
 
-		try (Connection con = ConnectionUtil.getConnectionFromFile(filename)) {
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
 
 			// use a prepared statement
 			String sql = "SELECT * FROM EMPLOYEE WHERE EMPLOYEE_USERNAME = ?";
@@ -89,5 +87,36 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 
 		return emp;
+	}
+
+	@Override
+	public boolean getManagerStatus(String user) {
+		PreparedStatement pstmt = null;
+		boolean isManager = false;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+			// Declare prepared statement
+			String sql = "SELECT EMPLOYEE_MANAGERSTATUS FROM EMPLOYEE WHERE EMPLOYEE_USERNAME = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user);
+			ResultSet rs = pstmt.executeQuery();
+
+			// Will only give us one record usernames are unique
+			if (rs.next()) {
+				isManager = rs.getBoolean("EMPLOYEE_MANAGERSTATUS");
+			}
+
+			con.close();
+
+			// Will only return true if the user is a manager
+			if(isManager)
+				return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }
