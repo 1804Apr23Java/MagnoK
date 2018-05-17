@@ -1,11 +1,19 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import dao.EmployeeDao;
+import dao.EmployeeDaoImpl;
+import domain.Employee;
 
 /**
  * Servlet implementation class EmployeeServlet
@@ -21,9 +29,10 @@ public class EmployeeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// Obtain the current Session or a null
 		HttpSession session = request.getSession(false);
+
 		// Checks to see if a valid session exists
 		if (session != null && session.getAttribute("username") != null) {
-			request.getRequestDispatcher("pages/Employee.html").forward(request, response);
+			request.getRequestDispatcher("pages/Employee.html").forward(request, response);			
 		} else {
 			// If there is no session (no one logged in yet) will send user to login page
 			response.sendRedirect("login");
@@ -32,8 +41,7 @@ public class EmployeeServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

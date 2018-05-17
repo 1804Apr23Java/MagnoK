@@ -345,3 +345,5 @@ function getChildren() {
         console.log(s[i].textContent);
     }
 }
+
+let sum = add(3, 4);
