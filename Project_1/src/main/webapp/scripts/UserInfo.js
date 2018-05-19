@@ -22,6 +22,7 @@ function getUserInfo(xhr) {
 		console.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText);
 		console.log(res);
+		// If there is noone logged in it will kick them back to the login screen
 		if (res.username) {
 			document.getElementById("user").innerHTML = "you are logged in as "
 					+ res.username;

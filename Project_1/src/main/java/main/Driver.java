@@ -1,24 +1,25 @@
 package main;
 
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.util.List;
 
-import util.ConnectionUtil;
+import dao.ReimbursementsDao;
+import dao.ReimbursementsDaoImpl;
+import domain.Employee;
+import domain.Reimbursements;
 
 public class Driver {
 
 	public static void main(String[] args) {		
 		/*
 		 /* Test Connection	*/
-		try {
-			Connection con = ConnectionUtil.getConnectionFromFile();
-			System.out.println(con.toString());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			Connection con = ConnectionUtil.getConnectionFromFile();
+//			System.out.println(con.toString());
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 
 		
 //		Login l = new Login();
@@ -34,7 +35,6 @@ public class Driver {
 //		System.out.println("Login Successful!");
 		
 		//Checks if Manager or not
-		
 		
 	}
 
