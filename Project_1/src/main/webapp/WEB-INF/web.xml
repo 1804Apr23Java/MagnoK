@@ -59,4 +59,24 @@
     <servlet-name>UserInfo</servlet-name>
     <url-pattern>/user</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitReimbursement</display-name>
+    <servlet-name>SubmitReimbursement</servlet-name>
+    <servlet-class>servlets.SubmitReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitReimbursement</servlet-name>
+    <url-pattern>/submitreimb</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadReimbursement</display-name>
+    <servlet-name>UploadReimbursement</servlet-name>
+    <servlet-class>servlets.UploadReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadReimbursement</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
 </web-app>

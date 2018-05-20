@@ -47,8 +47,9 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 			if (rs.next()) {
 				rId = rs.getInt("MAX(REIMBURSEMENTS_ID)");
 			}
-			// Updates Reimbursement with the correct reimbursement id
+			// Updates Reimbursement with the correct reimbursement id and date
 			r.setId(rId);
+			r.setReqDate(d);
 
 			// Inserts primary keys from employee and reimbursement to join table to make
 			// sure employee
