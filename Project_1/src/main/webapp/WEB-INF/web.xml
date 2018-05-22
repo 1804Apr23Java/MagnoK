@@ -89,4 +89,24 @@
     <servlet-name>ReimbursementConfirmation</servlet-name>
     <url-pattern>/confirmation</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbursementInfo</display-name>
+    <servlet-name>ReimbursementInfo</servlet-name>
+    <servlet-class>servlets.ReimbursementInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementInfo</servlet-name>
+    <url-pattern>/reimbInfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DisplayPicture</display-name>
+    <servlet-name>DisplayPicture</servlet-name>
+    <servlet-class>servlets.DisplayPictureServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DisplayPicture</servlet-name>
+    <url-pattern>/displaypicture</url-pattern>
+  </servlet-mapping>
 </web-app>

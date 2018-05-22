@@ -16,15 +16,15 @@ function sendAjaxGet(url, func) {
 	xhr.send();
 }
 
-function getUserInfo(xhr) {
+function getReimbInfo(xhr) {
 	if (xhr.responseText) {
 		console.log(xhr.responseText);
 		var res = JSON.parse(xhr.responseText);
 		console.log(res);
 		// If there is noone logged in it will kick them back to the login screen
-		if (res.username) {
-			document.getElementById("user").innerHTML = "you are logged in as "
-					+ res.username;
+		if (res.id) {
+			document.getElementById("rId").innerHTML = "Reimbursement Number: "
+					+ res.id;
 		} else {
 			window.location = "http://localhost:8087/Project_1/login";
 		}
@@ -35,5 +35,5 @@ function getUserInfo(xhr) {
 
 window.onload = function() {
 	console.log("executed window.onload");
-	sendAjaxGet("http://localhost:8087/Project_1/user", getUserInfo);
+	sendAjaxGet("http://localhost:8087/Project_1/reimbInfo", getReimbInfo);
 }
