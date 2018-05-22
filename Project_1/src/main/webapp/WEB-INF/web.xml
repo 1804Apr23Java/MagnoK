@@ -71,12 +71,22 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>UploadReimbursement</display-name>
-    <servlet-name>UploadReimbursement</servlet-name>
-    <servlet-class>servlets.UploadReimbServlet</servlet-class>
+    <display-name>UploadPicture</display-name>
+    <servlet-name>UploadPicture</servlet-name>
+    <servlet-class>servlets.UploadPictureServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UploadReimbursement</servlet-name>
+    <servlet-name>UploadPicture</servlet-name>
     <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbursementConfirmation</display-name>
+    <servlet-name>ReimbursementConfirmation</servlet-name>
+    <servlet-class>servlets.ReimbConfirmationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementConfirmation</servlet-name>
+    <url-pattern>/confirmation</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -10,4 +10,5 @@ public interface ReimbursementsDao {
 	public Reimbursements getReimbursementByID(int id);
 	public List<Reimbursements> getPendingReimbursements(int id);
 	public List<Reimbursements> getAllReimbursements(int id);
+	public Reimbursements updateReimbursementFileName(int id, String fileName);
 }

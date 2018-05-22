@@ -205,4 +205,45 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 		return r;
 	}
 
+	@Override
+	public Reimbursements updateReimbursementFileName(int id, String fileName) {
+		Reimbursements r = null;
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+
+			// Update Reimbursement
+			String sql = "UPDATE REIMBURSEMENTS SET REIMBURSEMENTS_IMG = ? WHERE REIMBURSEMENTS_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, fileName);
+			pstmt.setInt(2, id);
+			pstmt.executeQuery();
+			
+			// Get reimbursement
+			sql = "SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				int pId = rs.getInt("REIMBURSEMENTS_ID");
+				String status = rs.getString("REIMBURSEMENTS_STATUS");
+				String reqNotes = rs.getString("REIMBURSEMENTS_REQUESTNOTES");
+				BigDecimal amount = new BigDecimal(String.valueOf(rs.getFloat("REIMBURSEMENTS_AMOUNT")));
+				Date reqQate = rs.getDate("REIMBURSEMENTS_REQUESTDATE");
+				String img = rs.getString("REIMBURSEMENTS_IMG");
+				r = new Reimbursements(pId, status, reqNotes, amount, reqQate, img);
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return r;
+	}
+
 }

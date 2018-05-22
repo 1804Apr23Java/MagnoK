@@ -33,6 +33,7 @@ public class UserInfoServlet extends HttpServlet {
 		if (session != null) {
 			// Get username from login servlet
 			String username = (String) session.getAttribute("username");
+			
 			// Get employee information
 			EmployeeDao e = new EmployeeDaoImpl();
 			Employee emp = e.getEmployeeByUsername(username);

@@ -1,0 +1,53 @@
+<form action="submitreimb" method="post" enctype="multipart/form-data">
+    <fieldset disabled>
+        <div class="form-group">
+            <label for="disabledTextInput">Employee Name</label> <input
+                type="text" id="disabledTextInput" class="form-control"
+                placeholder="Employee Name" name="fullName">
+        </div>
+    </fieldset>
+
+    <!-- Request Notes -->
+    <div class="form-group">
+        <label for="requestNotes">Reimbursement Request Notes</label>
+        <textarea class="form-control" id="requestNotes" rows="3"
+            name="requestNotes"></textarea>
+        <small id="passwordHelpBlock" class="form-text text-muted">
+            Please include all relevant information (Reason for request) max
+            (140 characters) </small>
+    </div>
+
+    <!-- Money Input -->
+    <div class="form-group">
+        <label for="amount">Requested Reimbursement</label> <input
+            type="number" class="form-control" id="amount"
+            placeholder="Enter exact amount">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">$</span> <span
+                class="input-group-text">0.00</span>
+        </div>
+        <input type="text" class="form-control"
+            aria-label="Amount (to the nearest dollar)" name="amount">
+        <div class="invalid-feedback">Please enter amount for
+            Reimbursement!</div>
+    </div>
+
+    <!-- Upload a Picture -->
+    <div>
+        <h6>Upload a Picture of your Receipt!</h6>
+        <input class="btn btn-primary" type="file" id="myFile"
+            onchange="fileNameChange" name="receipt"> <small
+            id="passwordHelpBlock" class="form-text text-muted">
+            Uploading a picture of your receipt will help expedite the
+            Reimbursement process </small>
+        <p id="fileName"></p>
+    </div>
+
+    <div>
+        <button class="btn btn-primary" type="submit">Submit
+            Reimbursement</button>
+    </div>
+
+</form>

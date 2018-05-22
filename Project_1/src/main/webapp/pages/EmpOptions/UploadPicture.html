@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Upload Receipt!</title>
+<link rel="stylesheet" href="css/SubmitReimb.css" />
+<!-- Linking Bootstrap-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+	<form action="upload" method="post" enctype="multipart/form-data">
+			
+		<h3> Would you like to upload a picture of your receipt? (Optional) </h3>
+	
+		<!-- Upload a Picture -->
+		<div>
+			<h6>Upload a Picture of your Receipt!</h6>
+			<input class="btn btn-primary" type="file" id="myFile"
+				onchange="fileNameChange" name="receipt"> <small
+				id="passwordHelpBlock" class="form-text text-muted">
+				Uploading a picture of your receipt will help expedite the
+				Reimbursement process </small>
+			<p id="fileName"></p>
+		</div>
+
+		<div>
+			<button class="btn btn-primary" type="submit">Submit Reimbursement!</button>
+		</div>
+
+	</form>
+	
+	<br>
+	
+	<div>
+			<a href="Employee"><button class="btn btn-primary">Cancel Request!</button></a>
+	</div>
+
+</body>
+<script src="scripts/UploadPhoto.js"></script>
+</html>
