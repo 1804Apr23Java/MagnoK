@@ -109,4 +109,44 @@
     <servlet-name>DisplayPicture</servlet-name>
     <url-pattern>/displaypicture</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpPendingReimb</display-name>
+    <servlet-name>EmpPendingReimb</servlet-name>
+    <servlet-class>servlets.EmpPendingReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpPendingReimb</servlet-name>
+    <url-pattern>/emppendreimb</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpObtainPendingReimb</display-name>
+    <servlet-name>EmpObtainPendingReimb</servlet-name>
+    <servlet-class>servlets.EmpObtainPendingReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpObtainPendingReimb</servlet-name>
+    <url-pattern>/empobtainpendreimb</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpResolvedReimb</display-name>
+    <servlet-name>EmpResolvedReimb</servlet-name>
+    <servlet-class>servlets.EmpResolvedReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpResolvedReimb</servlet-name>
+    <url-pattern>/viewresolvedreimb</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpObtainResolvedReimb</display-name>
+    <servlet-name>EmpObtainResolvedReimb</servlet-name>
+    <servlet-class>servlets.EmpObtainResolvedReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpObtainResolvedReimb</servlet-name>
+    <url-pattern>/empobtainresreimb</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -9,6 +9,8 @@ public interface ReimbursementsDao {
 	public Reimbursements createReimbursement(Employee e, Reimbursements r);
 	public Reimbursements getReimbursementByID(int id);
 	public List<Reimbursements> getPendingReimbursements(int id);
+	public List<Reimbursements> getResolvedReimbursements(int id);
 	public List<Reimbursements> getAllReimbursements(int id);
 	public Reimbursements updateReimbursementFileName(int id, String fileName);
+	public Reimbursements approveReimbursement(int id);
 }

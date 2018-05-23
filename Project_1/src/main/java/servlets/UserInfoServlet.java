@@ -37,6 +37,8 @@ public class UserInfoServlet extends HttpServlet {
 			// Get employee information
 			EmployeeDao e = new EmployeeDaoImpl();
 			Employee emp = e.getEmployeeByUsername(username);
+			
+			session.setAttribute("empId", emp.getId());
 
 			response.setContentType("application/json");
 			ObjectMapper om = new ObjectMapper();

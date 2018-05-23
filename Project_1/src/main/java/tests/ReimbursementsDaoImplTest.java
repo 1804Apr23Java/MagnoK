@@ -80,5 +80,25 @@ public class ReimbursementsDaoImplTest {
 		assertEquals(0, rnon.size());
 
 	}
+	
+	@Test
+	public void GettingResolvedRequestsCorrectly() {
+		Employee k = new Employee(1, "kevin", "magno", "kmagno", "password", null, null, null, null, null, null, null, null, false);
+		Employee kManager = new Employee(2, "Kevin", "Magno", "kmagnomanager", "p4ssw0rd", null, null, null, null, null, null, null, null, true);
+		
+		ReimbursementsDao rd = new ReimbursementsDaoImpl();
+		List<Reimbursements> rk = rd.getResolvedReimbursements(k.getId());
+	
+		// Test employee should have at least one resolved reimbursement that is the dummy request number 6
+		assertTrue(rk.size() > 0);
+	}
+	
+	@Test
+	public void SuccessfulApprovalReimbursementRequest() {
+	
+		// Approve the dummy request number 6
+		Reimbursements approveReq = rd.approveReimbursement(6);
+		assertEquals("APPROVED", approveReq.getStatus());	
+	}
 
 }

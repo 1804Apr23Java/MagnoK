@@ -1,6 +1,37 @@
-/**
- * 
- */
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Reimbursement Confirmation Page</title>
+</head>
+
+<body>
+	<table style="width: 100%">
+		<tr>
+			<th>Reimbursement ID</th>
+			<th>Request Notes</th>
+			<th>Amount</th>
+			<th>Request Date</th>
+			<th>Request Image</th>
+			<th>Image</th>
+		</tr>
+		<tr>
+			<td id="rId"></td>
+			<td id="reqNotes"></td>
+			<td id="amount"></td>
+			<td id="reqDate"></td>
+			<td id="reqImg"></td>
+			<td><img src="images/115.png"></td>
+		</tr>
+	</table>
+	
+
+	<a href="Employee">
+		<button type="button">Back to Employee Page</button>
+	</a>
+</body>
+<script>
 function sendAjaxGet(url, func) {
 
 	var xhr = new XMLHttpRequest()
@@ -27,12 +58,12 @@ function getReimbInfo(xhr) {
 			document.getElementById("reqNotes").innerHTML = res.reqNotes;
 			document.getElementById("amount").innerHTML = res.amount;
 			document.getElementById("reqDate").innerHTML = res.reqDate;
-			// document.getElementById("reqImg").innerHTML = res.img;
-			if(res.img === 'No file has been uploaded') {
-				document.getElementById("reqImg").innerHTML = res.img;
-			} else {
-				document.getElementsByTagName("IMG")[0].setAttribute("src", "Project_1/images/"+res.img);
-			}
+			document.getElementById("reqImg").innerHTML = res.img;
+			// if(res.img === 'No file has been uploaded') {
+			// 	document.getElementById("reqImg").innerHTML = res.img;
+			// } else {
+			// 	document.getElementsByTagName("IMG")[0].setAttribute("src", "images/"+res.img);
+			// }
 		} else {
 			window.location = "http://localhost:8087/Project_1/login";
 		}
@@ -56,3 +87,5 @@ window.onload = function () {
 	console.log("executed window.onload");
 	sendAjaxGet("http://localhost:8087/Project_1/reimbInfo", getReimbInfo);
 }
+</script>
+</html>

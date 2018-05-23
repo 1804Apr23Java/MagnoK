@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<!-- Linking Bootstrap-->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+	<div>
+		<a href="Employee"><button class="btn btn-primary">Back
+				to Employee Page</button></a>
+	</div>
+	<h3 id="loading">Loading...</h3>
+	<table style="width: 100%" class="table" id="Table">
+		<tr>
+			<th>Reimbursement ID</th>
+			<th>Status</th>
+			<th>Request Notes</th>
+			<th>Amount</th>
+			<th>Request Date</th>
+			<th>Request Image</th>
+			<th>Image</th>
+		</tr>
+	</table>
+</body>
+<script>
+	function sendAjaxGet(url, func) {
+
+		var xhr = new XMLHttpRequest()
+				|| new ActiveXObject("Microsoft.HTTPRequest");
+
+		xhr.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				func(this);
+			}
+		};
+
+		xhr.open("GET", url, true);
+		xhr.send();
+	}
+
+	function getReimbInfo(xhr) {
+		if (xhr.responseText) {
+			console.log(xhr.responseText);
+			var res = JSON.parse(xhr.responseText);
+			// If there are no pending reimbursements indicate in table
+			if (res) {
+				processReimb(res);
+			} else {
+				var table = document.getElementById("Table");
+				var row = table.insertRow(1);
+				var cell = row.insertCell(0);
+
+				cell.innerHTML = 'NO PENDING REIMBURSEMENTS HAVE BEEN FOUND';
+			}
+		}
+	}
+
+	function processReimb(res) {
+		var table = document.getElementById("Table");
+		for (var i = 0; i < res.reimbursements.length; i++) {
+			var row = table.insertRow(i + 1);
+			var cellId = row.insertCell(0);
+			var cellStat = row.insertCell(1);
+			var cellReqNotes = row.insertCell(2);
+			var cellAmount = row.insertCell(3);
+			var cellReqDate = row.insertCell(4);
+			var cellReqImg = row.insertCell(5);
+			var cellImg = row.insertCell(6);
+
+			cellId.innerHTML = res.reimbursements[i].id;
+			cellStat.innerHTML = res.reimbursements[i].status;
+			cellReqNotes.innerHTML = res.reimbursements[i].reqNotes;
+			cellAmount.innerHTML = '$' + res.reimbursements[i].amount;
+			cellReqDate.innerHTML = res.reimbursements[i].reqDate;
+			cellReqImg.innerHTML = res.reimbursements[i].img;
+		}
+		document.getElementById("loading")[0].setAttribute("display", "block");
+	}
+
+	function getPicture(xhr) {
+		if (xhr.responseText) {
+			console.log(xhr.responseText);
+			var res = JSON.parse(xhr.responseText);
+			console.log(res);
+			// If there is noone logged in it will kick them back to the login screen
+			document.getElementsByTagName("H1")[0].setAttribute("class",
+					"democlass");
+		}
+	}
+
+	window.onload = function() {
+		console.log("executed window.onload");
+		sendAjaxGet("http://localhost:8087/Project_1/empobtainpendreimb",
+				getReimbInfo);
+	}
+</script>
+</html>

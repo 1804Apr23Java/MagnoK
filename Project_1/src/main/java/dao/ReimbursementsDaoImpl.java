@@ -246,4 +246,95 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 		return r;
 	}
 
+	@Override
+	public List<Reimbursements> getResolvedReimbursements(int id) {
+		List<Reimbursements> r = new ArrayList<>();
+		List<Employee_Reimbursements> er = new ArrayList<>();
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+
+			// Search for matching reimbursements with employee id
+			String sql = "SELECT * FROM EMPLOYEE_REIMBURSEMENTS WHERE EMPLOYEE_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int empId = rs.getInt("EMPLOYEE_ID");
+				int reiId = rs.getInt("REIMBURSEMENTS_ID");
+				int manId = rs.getInt("REIMBURSEMENTS_MANAGERID");
+				er.add(new Employee_Reimbursements(empId, reiId, manId));
+			}
+			
+			// Search list for pending requests
+			for(int i = 0; i < er.size(); i++) {
+				sql = "SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS_ID = ? AND (REIMBURSEMENTS_STATUS = 'APPROVED' OR REIMBURSEMENTS_STATUS = 'DENIED')";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, er.get(i).getReiId());
+				rs = pstmt.executeQuery();
+				
+				while (rs.next()) {
+					int pId = rs.getInt("REIMBURSEMENTS_ID");
+					String status = rs.getString("REIMBURSEMENTS_STATUS");
+					String reqNotes = rs.getString("REIMBURSEMENTS_REQUESTNOTES");
+					BigDecimal amount = new BigDecimal(String.valueOf(rs.getFloat("REIMBURSEMENTS_AMOUNT")));
+					Date reqQate = rs.getDate("REIMBURSEMENTS_REQUESTDATE");
+					String img = rs.getString("REIMBURSEMENTS_IMG");
+					// Will only add to list if status is pending
+					r.add(new Reimbursements(pId, status, reqNotes, amount, reqQate, img));
+				}
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return r;
+	}
+
+	@Override
+	public Reimbursements approveReimbursement(int id) {
+		Reimbursements r = null;
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+
+			// Update Reimbursement
+			String sql = "UPDATE REIMBURSEMENTS SET REIMBURSEMENTS_STATUS = 'APPROVED' WHERE REIMBURSEMENTS_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			pstmt.executeQuery();
+			
+			// Get reimbursement
+			sql = "SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS_ID = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				int pId = rs.getInt("REIMBURSEMENTS_ID");
+				String status = rs.getString("REIMBURSEMENTS_STATUS");
+				String reqNotes = rs.getString("REIMBURSEMENTS_REQUESTNOTES");
+				BigDecimal amount = new BigDecimal(String.valueOf(rs.getFloat("REIMBURSEMENTS_AMOUNT")));
+				Date reqQate = rs.getDate("REIMBURSEMENTS_REQUESTDATE");
+				String img = rs.getString("REIMBURSEMENTS_IMG");
+				r = new Reimbursements(pId, status, reqNotes, amount, reqQate, img);
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return r;
+	}
+
 }

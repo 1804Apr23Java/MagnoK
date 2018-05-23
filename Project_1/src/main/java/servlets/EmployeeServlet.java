@@ -32,7 +32,8 @@ public class EmployeeServlet extends HttpServlet {
 
 		// Checks to see if a valid session exists
 		if (session != null && session.getAttribute("username") != null) {
-			request.getRequestDispatcher("pages/Employee.html").forward(request, response);			
+
+			request.getRequestDispatcher("pages/Employee.html").forward(request, response);
 		} else {
 			// If there is no session (no one logged in yet) will send user to login page
 			response.sendRedirect("login");
