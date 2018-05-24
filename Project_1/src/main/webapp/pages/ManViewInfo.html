@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Manager Information</title>
+
+    <!-- Linking Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <body>
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="Manager">Manager Homepage</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="approvedeny">Approve/Deny Reimbursements Requests</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="manviewresolvedreimb">View Resolved Requests</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="manviewallemp">View All Employees</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="manviewreimbemp">View Reimbursement Requests From Single Employee</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="manupdateempinfo">Update Employee information</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="manviewinfo">View Your Information</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout">Logout</a>
+            </li>
+        </ul>
+
+        <table style="width: 100%" class="table" id="Table">
+            <tr>
+                <th>Manager ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Title</th>
+                <th>Birthday</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip Code</th>
+                <th>Phone Number</th>
+            </tr>
+            <tr>
+            </tr>
+        </table>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateEmployeeInfo">
+            Edit Information
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="updateEmployeeInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Manager Information</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="updateEmployee" method="post">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="abc@gmail.com">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="formBday">Birthday</label>
+                                <input type="date" class="form-control" name="bday">
+                            </div>
+                            <div class="form-group">
+                                <label for="formAddress">Address</label>
+                                <input type="text" class="form-control" name="address" placeholder="123 Waverly Place">
+                            </div>
+                            <div class="form-group">
+                                <label for="formCity">City</label>
+                                <input type="text" class="form-control" name="city" placeholder="Tampa">
+                            </div>
+                            <div class="form-group">
+                                <label for="state" class="col-sm-2 control-label">State</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" id="state" name="state">
+                                        <option value="">N/A</option>
+                                        <option value="AK">Alaska</option>
+                                        <option value="AL">Alabama</option>
+                                        <option value="AR">Arkansas</option>
+                                        <option value="AZ">Arizona</option>
+                                        <option value="CA">California</option>
+                                        <option value="CO">Colorado</option>
+                                        <option value="CT">Connecticut</option>
+                                        <option value="DC">District of Columbia</option>
+                                        <option value="DE">Delaware</option>
+                                        <option value="FL">Florida</option>
+                                        <option value="GA">Georgia</option>
+                                        <option value="HI">Hawaii</option>
+                                        <option value="IA">Iowa</option>
+                                        <option value="ID">Idaho</option>
+                                        <option value="IL">Illinois</option>
+                                        <option value="IN">Indiana</option>
+                                        <option value="KS">Kansas</option>
+                                        <option value="KY">Kentucky</option>
+                                        <option value="LA">Louisiana</option>
+                                        <option value="MA">Massachusetts</option>
+                                        <option value="MD">Maryland</option>
+                                        <option value="ME">Maine</option>
+                                        <option value="MI">Michigan</option>
+                                        <option value="MN">Minnesota</option>
+                                        <option value="MO">Missouri</option>
+                                        <option value="MS">Mississippi</option>
+                                        <option value="MT">Montana</option>
+                                        <option value="NC">North Carolina</option>
+                                        <option value="ND">North Dakota</option>
+                                        <option value="NE">Nebraska</option>
+                                        <option value="NH">New Hampshire</option>
+                                        <option value="NJ">New Jersey</option>
+                                        <option value="NM">New Mexico</option>
+                                        <option value="NV">Nevada</option>
+                                        <option value="NY">New York</option>
+                                        <option value="OH">Ohio</option>
+                                        <option value="OK">Oklahoma</option>
+                                        <option value="OR">Oregon</option>
+                                        <option value="PA">Pennsylvania</option>
+                                        <option value="PR">Puerto Rico</option>
+                                        <option value="RI">Rhode Island</option>
+                                        <option value="SC">South Carolina</option>
+                                        <option value="SD">South Dakota</option>
+                                        <option value="TN">Tennessee</option>
+                                        <option value="TX">Texas</option>
+                                        <option value="UT">Utah</option>
+                                        <option value="VA">Virginia</option>
+                                        <option value="VT">Vermont</option>
+                                        <option value="WA">Washington</option>
+                                        <option value="WI">Wisconsin</option>
+                                        <option value="WV">West Virginia</option>
+                                        <option value="WY">Wyoming</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom05">Zip</label>
+                                <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" name="zip">
+                                <div class="invalid-feedback">
+                                    Please provide a valid zip.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="formPhone">Phone Number</label>
+                                <div>
+                                    <input type="text" class="input-medium bfh-phone form-control" data-format="+1 (ddd) ddd-dddd" name="phone">
+                                    <span class="bfh-phone" data-format="+1 (ddd) ddd-dddd" data-number="15555555555"></span>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" type="submit">Save changes
+                                </button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <!--JQuery CDN-->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+    <!--Scripts for Modal-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function sendAjaxGet(url, func) {
+
+            var xhr = new XMLHttpRequest()
+                || new ActiveXObject("Microsoft.HTTPRequest");
+
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    func(this);
+                }
+            };
+
+            xhr.open("GET", url, true);
+            xhr.send();
+        }
+
+        function getUserInfo(xhr) {
+            if (xhr.responseText) {
+                console.log(xhr.responseText);
+                var res = JSON.parse(xhr.responseText);
+                console.log(res);
+                // If there is noone logged in it will kick them back to the login screen
+                if (res.username) {
+                    printUserInfo(res);
+                } else {
+                    window.location = "http://localhost:8087/Project_1/login";
+                }
+            } else {
+                window.location = "http://localhost:8087/Project_1/login";
+            }
+        }
+
+        function printUserInfo(res) {
+            var table = document.getElementById("Table");
+            var row = table.insertRow(1);
+            var cellId = row.insertCell(0);
+            var cellFirst = row.insertCell(1);
+            var cellLast = row.insertCell(2);
+            var cellUser = row.insertCell(3);
+            var cellEmail = row.insertCell(4);
+            var cellTitle = row.insertCell(5);
+            var cellBday = row.insertCell(6);
+            var cellAddr = row.insertCell(7);
+            var cellCity = row.insertCell(8);
+            var cellState = row.insertCell(9);
+            var cellZip = row.insertCell(10);
+            var cellPhone = row.insertCell(11);
+
+            cellId.innerHTML = res.id;
+            cellFirst.innerHTML = res.firstName;
+            cellLast.innerHTML = res.lastName;
+            cellUser.innerHTML = res.username;
+            cellEmail.innerHTML = res.email;
+            cellTitle.innerHTML = res.title;
+            cellBday.innerHTML = res.birthday;
+            cellAddr.innerHTML = res.address;
+            cellCity.innerHTML = res.city;
+            cellState.innerHTML = res.state;
+            cellZip.innerHTML = res.zip;
+            cellPhone.innerHTML = res.phone;
+        }
+
+        window.onload = function () {
+            console.log("executed window.onload");
+            sendAjaxGet("http://localhost:8087/Project_1/user", getUserInfo);
+        }
+    </script>
+
+</html>

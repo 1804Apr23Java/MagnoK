@@ -6,7 +6,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import main.Login;
 import util.RequestHelper;
 
 public class RequestHelperTest {

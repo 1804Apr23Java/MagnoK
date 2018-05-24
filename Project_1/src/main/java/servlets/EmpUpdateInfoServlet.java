@@ -78,7 +78,14 @@ public class EmpUpdateInfoServlet extends HttpServlet {
 			System.out.println("Updated Phone!");
 		}
 		
-		request.getRequestDispatcher("empviewinfo").forward(request, response);
+		if(e.isManager()) {
+			//Send to Manager
+			request.getRequestDispatcher("manviewinfo").forward(request, response);
+		} else {
+			// Send to Employee
+			request.getRequestDispatcher("empviewinfo").forward(request, response);
+		}
+		
 	}
 
 }

@@ -15,6 +15,7 @@ import org.junit.rules.ExpectedException;
 import dao.ReimbursementsDao;
 import dao.ReimbursementsDaoImpl;
 import domain.Employee;
+import domain.Employee_Reimbursements_Reimb;
 import domain.Reimbursements;
 
 public class ReimbursementsDaoImplTest {
@@ -94,11 +95,31 @@ public class ReimbursementsDaoImplTest {
 	}
 	
 	@Test
+	public void RenamingFileNameCorrectly() {
+	
+		// Approve the dummy request number 6
+		String fName = "test.png";
+		Reimbursements reqWithPicture = rd.updateReimbursementFileName(6, fName);
+		assertEquals(fName, reqWithPicture.getImg());	
+		
+	}
+	
+	@Test
 	public void SuccessfulApprovalReimbursementRequest() {
 	
 		// Approve the dummy request number 6
 		Reimbursements approveReq = rd.approveReimbursement(6);
 		assertEquals("APPROVED", approveReq.getStatus());	
+	}
+	
+	@Test
+	public void GettingAllResolvedRequestsCorrectly() {
+		
+		ReimbursementsDao rd = new ReimbursementsDaoImpl();
+		List<Employee_Reimbursements_Reimb> r = rd.getAllResolvedReimbursements();
+	
+		// Test employee should have at least one resolved reimbursement that is the dummy request number 6
+		assertTrue(r.size() > 0);
 	}
 
 }

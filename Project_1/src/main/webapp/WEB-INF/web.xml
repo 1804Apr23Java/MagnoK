@@ -169,4 +169,44 @@
     <servlet-name>EmpUpdateInfo</servlet-name>
     <url-pattern>/updateEmployee</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InvalidLogin</display-name>
+    <servlet-name>InvalidLogin</servlet-name>
+    <servlet-class>servlets.InvalidLoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InvalidLogin</servlet-name>
+    <url-pattern>/InvalidLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManViewInfo</display-name>
+    <servlet-name>ManViewInfo</servlet-name>
+    <servlet-class>servlets.ManViewInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManViewInfo</servlet-name>
+    <url-pattern>/manviewinfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManObtainResolvedReimbServlet</display-name>
+    <servlet-name>ManObtainResolvedReimbServlet</servlet-name>
+    <servlet-class>servlets.ManObtainResolvedReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManObtainResolvedReimbServlet</servlet-name>
+    <url-pattern>/manobtainresreimb</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManResolvedReimbServlet</display-name>
+    <servlet-name>ManResolvedReimbServlet</servlet-name>
+    <servlet-class>servlets.ManResolvedReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManResolvedReimbServlet</servlet-name>
+    <url-pattern>/manviewresolvedreimb</url-pattern>
+  </servlet-mapping>
 </web-app>

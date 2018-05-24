@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+	<meta charset="ISO-8859-1">
+	<title>Manager</title>
 </head>
+
+<!-- Linking Bootstrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 <body>
-	Hello from the Manager page!
-	<a href="logout"><button type="button" >Logout</button></a>
-	
+	<ul class="nav nav-pills nav-fill">
+		<li class="nav-item">
+			<a class="nav-link active" href="Manager">Manager Homepage</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="approvedeny">Approve/Deny Reimbursements Requests</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manviewresolvedreimb">View Resolved Requests</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manviewallemp">View All Employees</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manviewreimbemp">View Reimbursement Requests From Single Employee</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manupdateempinfo">Update Employee information</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manviewinfo">View Your Information</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="logout">Logout</a>
+		</li>
+	</ul>
+
+	<br> Hello from the Manager page!
+	<a href="logout">
+		<button type="button">Logout</button>
+	</a>
+
 	<div>
 		<p id="user"></p>
 	</div>
-	
+
 </body>
 <script src="scripts/UserInfo.js"></script>
+
 </html>

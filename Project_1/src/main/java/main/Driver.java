@@ -10,6 +10,8 @@ import domain.Reimbursements;
 public class Driver {
 
 	public static void main(String[] args) {		
+		//Driver Class is purely for test purposes
+		
 		/*
 		 /* Test Connection	*/
 //		try {
@@ -20,7 +22,6 @@ public class Driver {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-
 		
 //		Login l = new Login();
 //		EmployeeDao e = new EmployeeDaoImpl();

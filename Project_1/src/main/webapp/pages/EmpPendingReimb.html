@@ -9,34 +9,27 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="Employee">Employee</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-		 aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="submitreimb">Submit Reimbursement Request
-					</a>
-				</li>
-				<li class="nav-item active">
-					<a class="nav-link" href="emppendreimb">View Pending Reimbursement Requests
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="empviewresolvedreimb">View Resolved Reimbursement Requests</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="empviewinfo">View Your Information</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="empupdateinfo">Update Your Information</a>
-				</li>
-		</div>
-	</nav>
-	
+	<ul class="nav nav-pills nav-fill">
+		<li class="nav-item">
+			<a class="nav-link" href="Employee">Employee Homepage</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="submitreimb">Submit Reimbursement Request</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link active" href="emppendreimb">View Pending Reimbursement Requests</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="empviewresolvedreimb">View Resolved Reimbursement Requests</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="empviewinfo">View Your Information</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="logout">Logout</a>
+		</li>
+	</ul>
+
 	<h3 id="loading">Loading...</h3>
 	<table style="width: 100%" class="table" id="Table">
 		<tr>

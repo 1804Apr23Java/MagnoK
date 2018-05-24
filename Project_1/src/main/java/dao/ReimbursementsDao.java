@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import domain.Employee;
+import domain.Employee_Reimbursements_Reimb;
 import domain.Reimbursements;
 
 public interface ReimbursementsDao {
@@ -14,4 +15,5 @@ public interface ReimbursementsDao {
 	public Reimbursements approveReimbursement(int id);
 	//Test
 	public Reimbursements updateReimbursementFileName(int id, String fileName);
+	public List<Employee_Reimbursements_Reimb> getAllResolvedReimbursements();
 }

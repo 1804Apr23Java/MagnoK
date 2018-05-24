@@ -13,6 +13,7 @@ import java.util.List;
 
 import domain.Employee;
 import domain.Employee_Reimbursements;
+import domain.Employee_Reimbursements_Reimb;
 import domain.Reimbursements;
 import util.ConnectionUtil;
 
@@ -124,14 +125,14 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 				int manId = rs.getInt("REIMBURSEMENTS_MANAGERID");
 				er.add(new Employee_Reimbursements(empId, reiId, manId));
 			}
-			
+
 			// Search list for pending requests
-			for(int i = 0; i < er.size(); i++) {
+			for (int i = 0; i < er.size(); i++) {
 				sql = "SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS_ID = ? AND REIMBURSEMENTS_STATUS = 'PENDING'";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, er.get(i).getReiId());
 				rs = pstmt.executeQuery();
-				
+
 				while (rs.next()) {
 					int pId = rs.getInt("REIMBURSEMENTS_ID");
 					String status = rs.getString("REIMBURSEMENTS_STATUS");
@@ -175,14 +176,14 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 				int manId = rs.getInt("REIMBURSEMENTS_MANAGERID");
 				er.add(new Employee_Reimbursements(empId, reiId, manId));
 			}
-			
+
 			// Get all requests
-			for(int i = 0; i < er.size(); i++) {
+			for (int i = 0; i < er.size(); i++) {
 				sql = "SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS_ID = ?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, er.get(i).getReiId());
 				rs = pstmt.executeQuery();
-				
+
 				while (rs.next()) {
 					int pId = rs.getInt("REIMBURSEMENTS_ID");
 					String status = rs.getString("REIMBURSEMENTS_STATUS");
@@ -218,7 +219,7 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 			pstmt.setString(1, fileName);
 			pstmt.setInt(2, id);
 			pstmt.executeQuery();
-			
+
 			// Get reimbursement
 			sql = "SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS_ID = ?";
 			pstmt = con.prepareStatement(sql);
@@ -266,14 +267,14 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 				int manId = rs.getInt("REIMBURSEMENTS_MANAGERID");
 				er.add(new Employee_Reimbursements(empId, reiId, manId));
 			}
-			
-			// Search list for pending requests
-			for(int i = 0; i < er.size(); i++) {
+
+			// Search list for resolved requests
+			for (int i = 0; i < er.size(); i++) {
 				sql = "SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS_ID = ? AND (REIMBURSEMENTS_STATUS = 'APPROVED' OR REIMBURSEMENTS_STATUS = 'DENIED')";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, er.get(i).getReiId());
 				rs = pstmt.executeQuery();
-				
+
 				while (rs.next()) {
 					int pId = rs.getInt("REIMBURSEMENTS_ID");
 					String status = rs.getString("REIMBURSEMENTS_STATUS");
@@ -309,7 +310,7 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, id);
 			pstmt.executeQuery();
-			
+
 			// Get reimbursement
 			sql = "SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS_ID = ?";
 			pstmt = con.prepareStatement(sql);
@@ -335,6 +336,64 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 		}
 
 		return r;
+	}
+
+	@Override
+	public List<Employee_Reimbursements_Reimb> getAllResolvedReimbursements() {
+		List<Reimbursements> r = new ArrayList<>();
+		List<Employee_Reimbursements> er = new ArrayList<>();
+		List<Employee_Reimbursements_Reimb> err = new ArrayList<>();
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+
+			// Search for matching reimbursements with employee id
+			String sql = "SELECT * FROM EMPLOYEE_REIMBURSEMENTS";
+			pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int empId = rs.getInt("EMPLOYEE_ID");
+				int reiId = rs.getInt("REIMBURSEMENTS_ID");
+				int manId = rs.getInt("REIMBURSEMENTS_MANAGERID");
+				er.add(new Employee_Reimbursements(empId, reiId, manId));
+			}
+
+			// Search list for resolved requests
+			for (int i = 0; i < er.size(); i++) {
+				sql = "SELECT * FROM REIMBURSEMENTS WHERE REIMBURSEMENTS_STATUS = 'APPROVED' OR REIMBURSEMENTS_STATUS = 'DENIED'";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					int pId = rs.getInt("REIMBURSEMENTS_ID");
+					String status = rs.getString("REIMBURSEMENTS_STATUS");
+					String reqNotes = rs.getString("REIMBURSEMENTS_REQUESTNOTES");
+					BigDecimal amount = new BigDecimal(String.valueOf(rs.getFloat("REIMBURSEMENTS_AMOUNT")));
+					Date reqQate = rs.getDate("REIMBURSEMENTS_REQUESTDATE");
+					String img = rs.getString("REIMBURSEMENTS_IMG");
+					// Will only add to list if status is pending
+					r.add(new Reimbursements(pId, status, reqNotes, amount, reqQate, img));
+				}
+			}
+
+			for (int i = 0; i < r.size(); i++) {
+				if (er.get(i).getReiId() == r.get(i).getId()) {
+					err.add(new Employee_Reimbursements_Reimb(er.get(i).getEmpId(), er.get(i).getReiId(),
+							er.get(i).getManId(), r.get(i).getStatus(), r.get(i).getReqNotes(), r.get(i).getAmount(),
+							r.get(i).getReqDate(), r.get(i).getImg()));
+				}
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return err;
 	}
 
 }
