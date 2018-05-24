@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Employee</title>
+	<meta charset="ISO-8859-1">
+	<title>Employee</title>
 </head>
+
+<!-- Linking Bootstrap-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 <body>
-	Hello from the Employee Page!
-	<a href="logout"><button type="button" >Logout</button></a>
-	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="Employee">Employee</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+		 aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="submitreimb">Submit Reimbursement Request
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="emppendreimb">View Pending Reimbursement Requests</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="empviewresolvedreimb">View Resolved Reimbursement Requests</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="empviewinfo">View Your Information</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="empupdateinfo">Update Your Information</a>
+				</li>
+		</div>
+	</nav>
+
+
+	<br> Hello from the Employee Page!
+	<a href="logout">
+		<button type="button">Logout</button>
+	</a>
+
 	<div>
 		<p id="user"></p>
 	</div>
-	
-	<a href="submitreimb"><button type="button" >Submit Reimbursement Request</button></a>
-	<a href="emppendreimb"><button type="button" >View Pending Reimbursement Requests</button></a>
-	<a href="viewresolvedreimb"><button type="button" >View Resolved Reimbursement Requests</button></a>
-	<a href="viewinfo"><button type="button" >View Your Information</button></a>
-	<a href="updateinfo"><button type="button" >Update Your Information</button></a><a></a>
-	
+
 </body>
 <script src="scripts/UserInfo.js"></script>
+
 </html>

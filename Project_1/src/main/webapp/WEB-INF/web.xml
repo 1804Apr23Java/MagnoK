@@ -137,7 +137,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>EmpResolvedReimb</servlet-name>
-    <url-pattern>/viewresolvedreimb</url-pattern>
+    <url-pattern>/empviewresolvedreimb</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -148,5 +148,25 @@
   <servlet-mapping>
     <servlet-name>EmpObtainResolvedReimb</servlet-name>
     <url-pattern>/empobtainresreimb</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpViewInfo</display-name>
+    <servlet-name>EmpViewInfo</servlet-name>
+    <servlet-class>servlets.EmpViewInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpViewInfo</servlet-name>
+    <url-pattern>/empviewinfo</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmpUpdateInfo</display-name>
+    <servlet-name>EmpUpdateInfo</servlet-name>
+    <servlet-class>servlets.EmpUpdateInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmpUpdateInfo</servlet-name>
+    <url-pattern>/updateEmployee</url-pattern>
   </servlet-mapping>
 </web-app>
