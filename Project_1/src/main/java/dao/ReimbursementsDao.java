@@ -17,4 +17,5 @@ public interface ReimbursementsDao {
 	public Reimbursements updateReimbursementFileName(int id, String fileName);
 	public List<Employee_Reimbursements_Reimb> getAllResolvedReimbursements();
 	public List<Employee_Reimbursements_Reimb> getAllPendingReimbursements();
+	public List<Employee_Reimbursements_Reimb> getAllReimbursementsByEmpId(int id);
 }

@@ -249,4 +249,54 @@
     <servlet-name>ManDenyServlet</servlet-name>
     <url-pattern>/ManDenyServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManViewAllEmpServlet</display-name>
+    <servlet-name>ManViewAllEmpServlet</servlet-name>
+    <servlet-class>servlets.ManViewAllEmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManViewAllEmpServlet</servlet-name>
+    <url-pattern>/manviewallemp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManObtainAllEmp</display-name>
+    <servlet-name>ManObtainAllEmp</servlet-name>
+    <servlet-class>servlets.ManObtainAllEmp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManObtainAllEmp</servlet-name>
+    <url-pattern>/ManObtainAllEmp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManViewReimEmpServlet</display-name>
+    <servlet-name>ManViewReimEmpServlet</servlet-name>
+    <servlet-class>servlets.ManViewReimEmpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManViewReimEmpServlet</servlet-name>
+    <url-pattern>/manviewreimbemp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManGetEmpReimbServlet</display-name>
+    <servlet-name>ManGetEmpReimbServlet</servlet-name>
+    <servlet-class>servlets.ManGetEmpReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManGetEmpReimbServlet</servlet-name>
+    <url-pattern>/ManGetEmpReimbServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManViewReimEmpDispServlet</display-name>
+    <servlet-name>ManViewReimEmpDispServlet</servlet-name>
+    <servlet-class>servlets.ManViewReimEmpDispServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManViewReimEmpDispServlet</servlet-name>
+    <url-pattern>/ManViewReimEmpDispServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

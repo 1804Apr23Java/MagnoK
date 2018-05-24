@@ -6,9 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import domain.Employee;
+import domain.Employee_Reimbursements;
+import domain.Employee_Reimbursements_Reimb;
 import domain.Reimbursements;
 import util.ConnectionUtil;
 
@@ -462,6 +466,48 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		return e;
+	}
+
+	@Override
+	public List<Employee> getAllEmployees() {
+		List<Employee> e = new ArrayList<>();
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+
+			// Search for matching reimbursements with employee id
+			String sql = "SELECT * FROM EMPLOYEE ORDER BY EMPLOYEE_ID ASC";
+			pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int pId = rs.getInt("EMPLOYEE_ID");
+				String lastName = rs.getString("EMPLOYEE_LASTNAME");
+				String firstName = rs.getString("EMPLOYEE_FIRSTNAME");
+				String username = rs.getString("EMPLOYEE_USERNAME");
+				String password = rs.getString("EMPLOYEE_PASSWORD");
+				String email2 = rs.getString("EMPLOYEE_EMAIL");
+				String title = rs.getString("EMPLOYEE_TITLE");
+				Date birthday2 = rs.getDate("EMPLOYEE_BIRTHDAY");
+				String address2 = rs.getString("EMPLOYEE_ADDRESS");
+				String city2 = rs.getString("EMPLOYEE_CITY");
+				String state2 = rs.getString("EMPLOYEE_STATE");
+				String zip2 = rs.getString("EMPLOYEE_ZIP");
+				String phone = rs.getString("EMPLOYEE_PHONE");
+				boolean isManager = rs.getBoolean("EMPLOYEE_MANAGERSTATUS");
+				e.add(new Employee(pId, lastName, firstName, username, password, email2, title, birthday2, address2, city2,
+						state2, zip2, phone, isManager));
+			}
+
+			con.close();
+
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+
 		return e;
 	}
 }

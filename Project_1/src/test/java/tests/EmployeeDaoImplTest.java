@@ -1,8 +1,10 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -10,7 +12,10 @@ import org.junit.rules.ExpectedException;
 
 import dao.EmployeeDao;
 import dao.EmployeeDaoImpl;
+import dao.ReimbursementsDao;
+import dao.ReimbursementsDaoImpl;
 import domain.Employee;
+import domain.Employee_Reimbursements_Reimb;
 
 public class EmployeeDaoImplTest {
 	
@@ -147,6 +152,21 @@ public class EmployeeDaoImplTest {
 		kUpdated = e.updateEmployeePhoneNumber(1, newPhone);
 		assertEquals(newPhone, kUpdated.getPhone());
 			
+	}
+	
+	@Test
+	public void GettingAllEmployeesCorrectly() {
+
+		List<Employee> emp = e.getAllEmployees();
+
+		// Checking output
+		for (int i = 0; i < emp.size(); i++) {
+
+			System.out.println(i + " " + emp.get(i));
+		}
+
+		// There is at least 2 employees (test employee and manager)
+		assertTrue(emp.size() > 0);
 	}
 
 }

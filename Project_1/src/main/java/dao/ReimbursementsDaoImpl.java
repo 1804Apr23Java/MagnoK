@@ -505,4 +505,64 @@ public class ReimbursementsDaoImpl implements ReimbursementsDao {
 		return err;
 	}
 
+	@Override
+	public List<Employee_Reimbursements_Reimb> getAllReimbursementsByEmpId(int id) {
+		List<Reimbursements> r = new ArrayList<>();
+		List<Employee_Reimbursements> er = new ArrayList<>();
+		List<Employee_Reimbursements_Reimb> err = new ArrayList<>();
+		PreparedStatement pstmt = null;
+
+		try (Connection con = ConnectionUtil.getConnectionFromFile()) {
+
+			// Search for matching reimbursements with employee id
+			String sql = "SELECT * FROM EMPLOYEE_REIMBURSEMENTS WHERE EMPLOYEE_ID = ? ORDER BY REIMBURSEMENTS_ID ASC";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int empId = rs.getInt("EMPLOYEE_ID");
+				int reiId = rs.getInt("REIMBURSEMENTS_ID");
+				int manId = rs.getInt("REIMBURSEMENTS_MANAGERID");
+				er.add(new Employee_Reimbursements(empId, reiId, manId));
+			}
+
+			// Search list for pending requests
+			sql = "SELECT * FROM REIMBURSEMENTS ORDER BY REIMBURSEMENTS_ID ASC";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int pId = rs.getInt("REIMBURSEMENTS_ID");
+				String status = rs.getString("REIMBURSEMENTS_STATUS");
+				String reqNotes = rs.getString("REIMBURSEMENTS_REQUESTNOTES");
+				BigDecimal amount = new BigDecimal(String.valueOf(rs.getFloat("REIMBURSEMENTS_AMOUNT")));
+				Date reqQate = rs.getDate("REIMBURSEMENTS_REQUESTDATE");
+				String img = rs.getString("REIMBURSEMENTS_IMG");
+				// Will only add to list if status is pending
+				r.add(new Reimbursements(pId, status, reqNotes, amount, reqQate, img));
+			}
+
+			for (int i = 0; i < er.size(); i++) {
+				for (int j = 0; j < r.size(); j++) {
+					if(r.get(j).getId() == er.get(i).getReiId()) {
+						err.add(new Employee_Reimbursements_Reimb(er.get(i).getEmpId(), er.get(i).getReiId(),
+								er.get(i).getManId(), r.get(j).getStatus(), r.get(j).getReqNotes(), r.get(j).getAmount(),
+								r.get(j).getReqDate(), r.get(j).getImg()));
+						break;
+					}
+				}
+			}
+
+			con.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return err;
+	}
+
 }

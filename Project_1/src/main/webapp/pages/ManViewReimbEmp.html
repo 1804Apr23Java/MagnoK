@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>View Reimbursements of Employee</title>
+    <!-- Linking Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+            <a class="nav-link" href="Manager">Manager Homepage</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="approvedeny">Approve/Deny Reimbursements Requests</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="manviewresolvedreimb">View Resolved Requests</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="manviewallemp">View All Employees</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="manviewreimbemp">View Reimbursement Requests From Single Employee</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="manviewinfo">View Your Information</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="logout">Logout</a>
+        </li>
+    </ul>
+
+    <form action="manviewreimbemp" method="post">
+        <label for="exampleInputEmail1">Enter Employee ID</label>
+        <input type="number" name="empID" class="form-control" id="empID" aria-describedby="emailHelp">
+        <div>
+            <button class="btn btn-primary" id="empID" type="submit">Get Reimbursements!
+            </button>
+        </div>
+    </form>
+</body>
+</html>

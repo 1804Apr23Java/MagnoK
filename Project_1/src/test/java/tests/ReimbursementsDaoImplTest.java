@@ -160,5 +160,21 @@ public class ReimbursementsDaoImplTest {
 		// Test employee should have at least one pending reimbursement
 		assertTrue(r.size() > 0);
 	}
+	
+	@Test
+	public void GettingAllRequestsForEmpCorrectly() {
+
+		ReimbursementsDao rd = new ReimbursementsDaoImpl();
+		List<Employee_Reimbursements_Reimb> r = rd.getAllReimbursementsByEmpId(1);
+
+		// Checking output
+		for (int i = 0; i < r.size(); i++) {
+
+			System.out.println(i + " " + r.get(i));
+		}
+
+		// Test employee should have at least one pending reimbursement
+		assertTrue(r.size() > 0);
+	}
 
 }

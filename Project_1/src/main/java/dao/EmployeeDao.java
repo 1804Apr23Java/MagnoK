@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Date;
+import java.util.List;
 
 import domain.Employee;
 
@@ -15,4 +16,5 @@ public interface EmployeeDao {
 	public Employee updateEmployeeState(int id, String state);
 	public Employee updateEmployeeZip(int id, String zip);
 	public Employee updateEmployeePhoneNumber(int id, String phonenumber);
+	public List<Employee> getAllEmployees();
 }
