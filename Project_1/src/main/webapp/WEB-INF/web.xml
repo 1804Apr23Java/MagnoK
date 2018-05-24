@@ -209,4 +209,44 @@
     <servlet-name>ManResolvedReimbServlet</servlet-name>
     <url-pattern>/manviewresolvedreimb</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManApproveDenyReimbServlet</display-name>
+    <servlet-name>ManApproveDenyReimbServlet</servlet-name>
+    <servlet-class>servlets.ManApproveDenyReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManApproveDenyReimbServlet</servlet-name>
+    <url-pattern>/approvedeny</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManObtainPendingReimbServlet</display-name>
+    <servlet-name>ManObtainPendingReimbServlet</servlet-name>
+    <servlet-class>servlets.ManObtainPendingReimbServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManObtainPendingReimbServlet</servlet-name>
+    <url-pattern>/manobtainpendreimb</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManApproveServlet</display-name>
+    <servlet-name>ManApproveServlet</servlet-name>
+    <servlet-class>servlets.ManApproveServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManApproveServlet</servlet-name>
+    <url-pattern>/ManApproveServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManDenyServlet</display-name>
+    <servlet-name>ManDenyServlet</servlet-name>
+    <servlet-class>servlets.ManDenyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManDenyServlet</servlet-name>
+    <url-pattern>/ManDenyServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

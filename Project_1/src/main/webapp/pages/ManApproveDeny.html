@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>All Pending Reimbursements</title>
+	<!-- Linking Bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+	<ul class="nav nav-pills nav-fill">
+		<li class="nav-item">
+			<a class="nav-link" href="Manager">Manager Homepage</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link active" href="approvedeny">Approve/Deny Reimbursements Requests</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manviewresolvedreimb">View Resolved Requests</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manviewallemp">View All Employees</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manviewreimbemp">View Reimbursement Requests From Single Employee</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manupdateempinfo">Update Employee information</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="manviewinfo">View Your Information</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="logout">Logout</a>
+		</li>
+	</ul>
+
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateEmployeeInfo">
+		Approve/Deny
+	</button>
+	<table style="width: 100%" class="table" id="Table">
+		<tr>
+			<th>Employee ID</th>
+			<th>Reimbursement ID</th>
+			<th>Resolving Manager ID</th>
+			<th>Status</th>
+			<th>Request Notes</th>
+			<th>Amount</th>
+			<th>Request Date</th>
+			<th>Request Image</th>
+			<th>Image</th>
+		</tr>
+	</table>
+	<!-- Modal -->
+	<div class="modal fade" id="updateEmployeeInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Edit Manager Information</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="ManApproveServlet" method="post">
+						<div class="form-group">
+							<label for="formBday">Reimbusement Number</label>
+							<input type="number" class="form-control" name="rId">
+						</div>
+						<button class="btn btn-primary" type="submit">Approve!
+						</button>
+					</form>
+					<form action="ManDenyServlet" method="post">
+						<div class="form-group">
+							<label for="formBday">Reimbusement Number</label>
+							<input type="number" class="form-control" name="rId">
+						</div>
+						<div>
+							<button class="btn btn-primary" type="submit">Deny!
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+<!--Scripts for Modal-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+ crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+ crossorigin="anonymous"></script>
+<script>
+	function sendAjaxGet(url, func) {
+
+		var xhr = new XMLHttpRequest()
+			|| new ActiveXObject("Microsoft.HTTPRequest");
+
+		xhr.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				func(this);
+			}
+		};
+
+		xhr.open("GET", url, true);
+		xhr.send();
+	}
+
+	function getReimbInfo(xhr) {
+		if (xhr.responseText) {
+			console.log(xhr.responseText);
+			var res = JSON.parse(xhr.responseText);
+			// If there is noone logged in it will kick them back to the login screen
+			if (res.reimbursements.length > 0) {
+				processCompleteReimb(res);
+			} else {
+				var table = document.getElementById("Table");
+				var row = table.insertRow(1);
+				var cell = row.insertCell(0);
+
+				cell.innerHTML = 'NO RESOLVED REIMBURSEMENTS HAVE BEEN FOUND';
+			}
+		}
+	}
+
+	// Full implementation with EmployeeID, ReimbursementID, ManagerID
+	function processCompleteReimb(res) {
+		var table = document.getElementById("Table");
+		for (var i = 0; i < res.reimbursements.length; i++) {
+			var row = table.insertRow(i + 1);
+			var cellEmpID = row.insertCell(0);
+			var cellReimbId = row.insertCell(1);
+			var cellManId = row.insertCell(2);
+			var cellStat = row.insertCell(3);
+			var cellReqNotes = row.insertCell(4);
+			var cellAmount = row.insertCell(5);
+			var cellReqDate = row.insertCell(6);
+			var cellReqImg = row.insertCell(7);
+			var cellImg = row.insertCell(8);
+
+			cellEmpID.innerHTML = res.reimbursements[i].empId;
+			cellReimbId.innerHTML = res.reimbursements[i].reiId;
+			cellManId.innerHTML = res.reimbursements[i].manId;
+			cellStat.innerHTML = res.reimbursements[i].status;
+			cellReqNotes.innerHTML = res.reimbursements[i].reqNotes;
+			cellAmount.innerHTML = '$' + res.reimbursements[i].amount;
+			cellReqDate.innerHTML = res.reimbursements[i].reqDate;
+			cellReqImg.innerHTML = res.reimbursements[i].img;
+		}
+	}
+
+	function getPicture(xhr) {
+		if (xhr.responseText) {
+			console.log(xhr.responseText);
+			var res = JSON.parse(xhr.responseText);
+			console.log(res);
+			// If there is noone logged in it will kick them back to the login screen
+			document.getElementsByTagName("H1")[0].setAttribute("class",
+				"democlass");
+		}
+	}
+
+	window.onload = function () {
+		console.log("executed window.onload");
+		sendAjaxGet("http://localhost:8087/Project_1/manobtainpendreimb",
+			getReimbInfo);
+	}
+</script>
+
+</html>

@@ -11,13 +11,13 @@
 <body>
     <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-            <a class="nav-link active" href="Manager">Manager Homepage</a>
+            <a class="nav-link" href="Manager">Manager Homepage</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="approvedeny">Approve/Deny Reimbursements Requests</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="manviewresolvedreimb">View Resolved Requests</a>
+            <a class="nav-link active" href="manviewresolvedreimb">View Resolved Requests</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="manviewallemp">View All Employees</a>
@@ -36,7 +36,6 @@
         </li>
     </ul>
 
-    <h3 id="loading">Loading...</h3>
     <table style="width: 100%" class="table" id="Table">
         <tr>
             <th>Employee ID</th>
@@ -84,28 +83,6 @@
         }
     }
 
-    // function processReimb(res) {
-    //     var table = document.getElementById("Table");
-    //     for (var i = 0; i < res.reimbursements.length; i++) {
-    //         var row = table.insertRow(i + 1);
-    //         var cellId = row.insertCell(0);
-    //         var cellStat = row.insertCell(1);
-    //         var cellReqNotes = row.insertCell(2);
-    //         var cellAmount = row.insertCell(3);
-    //         var cellReqDate = row.insertCell(4);
-    //         var cellReqImg = row.insertCell(5);
-    //         var cellImg = row.insertCell(6);
-
-    //         cellId.innerHTML = res.reimbursements[i].id;
-    //         cellStat.innerHTML = res.reimbursements[i].status;
-    //         cellReqNotes.innerHTML = res.reimbursements[i].reqNotes;
-    //         cellAmount.innerHTML = '$' + res.reimbursements[i].amount;
-    //         cellReqDate.innerHTML = res.reimbursements[i].reqDate;
-    //         cellReqImg.innerHTML = res.reimbursements[i].img;
-    //     }
-    //     document.getElementById("loading")[0].setAttribute("display", "block");
-    // }
-
 // Full implementation with EmployeeID, ReimbursementID, ManagerID
     function processCompleteReimb(res) {
         var table = document.getElementById("Table");
@@ -130,7 +107,6 @@
             cellReqDate.innerHTML = res.reimbursements[i].reqDate;
             cellReqImg.innerHTML = res.reimbursements[i].img;
         }
-        document.getElementById("loading")[0].setAttribute("display", "block");
     }
 
     function getPicture(xhr) {

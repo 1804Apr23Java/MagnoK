@@ -12,8 +12,9 @@ public interface ReimbursementsDao {
 	public List<Reimbursements> getPendingReimbursements(int id);
 	public List<Reimbursements> getResolvedReimbursements(int id);
 	public List<Reimbursements> getAllReimbursements(int id);
-	public Reimbursements approveReimbursement(int id);
-	//Test
+	public Reimbursements approveReimbursement(int id, int mId);
+	public Reimbursements denyReimbursement(int id, int mId);
 	public Reimbursements updateReimbursementFileName(int id, String fileName);
 	public List<Employee_Reimbursements_Reimb> getAllResolvedReimbursements();
+	public List<Employee_Reimbursements_Reimb> getAllPendingReimbursements();
 }

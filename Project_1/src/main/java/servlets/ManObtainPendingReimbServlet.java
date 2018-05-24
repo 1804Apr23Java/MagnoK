@@ -15,12 +15,12 @@ import dao.ReimbursementsDao;
 import dao.ReimbursementsDaoImpl;
 import domain.Employee_Reimbursements_Reimb;
 
-
-public class ManObtainResolvedReimbServlet extends HttpServlet {
+public class ManObtainPendingReimbServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public ManObtainResolvedReimbServlet() {
+
+    public ManObtainPendingReimbServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class ManObtainResolvedReimbServlet extends HttpServlet {
 			ReimbursementsDao rd = new ReimbursementsDaoImpl();
 
 			// List of Resolved Reimbursements
-			List<Employee_Reimbursements_Reimb> r = rd.getAllResolvedReimbursements();
+			List<Employee_Reimbursements_Reimb> r = rd.getAllPendingReimbursements();
 
 			response.setContentType("application/json");
 			ObjectMapper om = new ObjectMapper();
