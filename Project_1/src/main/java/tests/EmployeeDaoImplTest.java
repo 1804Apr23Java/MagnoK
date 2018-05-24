@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.sql.Date;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -53,6 +55,98 @@ public class EmployeeDaoImplTest {
 		assertEquals(true, e.getManagerStatus("kmagnomanager"));
 		// Empty User (Doesn't Exist)
 		assertEquals(null, e.getEmployeeByUsername("kmag"));	
+	}
+	
+	@Test
+	public void UpdatingEmailCorrectly() {	
+		
+		Employee k = new Employee(1, "kevin", "magno", "kmagno", "password", null, null, null, null, null, null, null, null, false);
+		String newEmail = "test@gmail.com";
+		Employee kUpdated = null;
+
+		// Correct User Info (Testing new email)
+		kUpdated = e.updateEmployeeEmail(1, newEmail);
+		assertEquals(newEmail, kUpdated.getEmail());
+			
+	}
+	
+	@Test
+	public void UpdatingBirthdayCorrectly() {	
+		
+		Employee k = new Employee(1, "kevin", "magno", "kmagno", "password", null, null, null, null, null, null, null, null, false);
+		String newBirthdayStr = "1994-09-29";
+		Date newBirthday = Date.valueOf(newBirthdayStr);	
+		Employee kUpdated = null;
+
+		// Correct User Info (Testing new email)
+		kUpdated = e.updateEmployeeBirthday(1, newBirthday);
+		assertEquals(newBirthday, kUpdated.getBirthday());
+			
+	}
+	
+	@Test
+	public void UpdatingAddressCorrectly() {	
+		
+		Employee k = new Employee(1, "kevin", "magno", "kmagno", "password", null, null, null, null, null, null, null, null, false);
+		String newAddress = "2919 Network Place";
+		Employee kUpdated = null;
+
+		// Correct User Info (Testing new email)
+		kUpdated = e.updateEmployeeAddress(1, newAddress);
+		assertEquals(newAddress, kUpdated.getAddress());
+			
+	}
+	
+	@Test
+	public void UpdatingCityCorrectly() {	
+		
+		Employee k = new Employee(1, "kevin", "magno", "kmagno", "password", null, null, null, null, null, null, null, null, false);
+		String newCity = "Lutz";
+		Employee kUpdated = null;
+
+		// Correct User Info (Testing new email)
+		kUpdated = e.updateEmployeeCity(1, newCity);
+		assertEquals(newCity, kUpdated.getCity());
+			
+	}
+	
+	@Test
+	public void UpdatingStateCorrectly() {	
+		
+		Employee k = new Employee(1, "kevin", "magno", "kmagno", "password", null, null, null, null, null, null, null, null, false);
+		String newState = "FL";
+		Employee kUpdated = null;
+
+		// Correct User Info (Testing new email)
+		kUpdated = e.updateEmployeeState(1, newState);
+		assertEquals(newState, kUpdated.getState());
+			
+	}
+	
+	@Test
+	public void UpdatingZipCorrectly() {	
+		
+		Employee k = new Employee(1, "kevin", "magno", "kmagno", "password", null, null, null, null, null, null, null, null, false);
+		String newZip = "33559";
+		Employee kUpdated = null;
+
+		// Correct User Info (Testing new email)
+		kUpdated = e.updateEmployeeZip(1, newZip);
+		assertEquals(newZip, kUpdated.getZip());
+			
+	}
+	
+	@Test
+	public void UpdatingPhoneNumberCorrectly() {	
+		
+		Employee k = new Employee(1, "kevin", "magno", "kmagno", "password", null, null, null, null, null, null, null, null, false);
+		String newPhone = "+1(718)-687-9478";
+		Employee kUpdated = null;
+
+		// Correct User Info (Testing new email)
+		kUpdated = e.updateEmployeePhoneNumber(1, newPhone);
+		assertEquals(newPhone, kUpdated.getPhone());
+			
 	}
 
 }

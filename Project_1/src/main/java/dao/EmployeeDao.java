@@ -8,7 +8,6 @@ public interface EmployeeDao {
 	public boolean checkPassword(String user, String password);
 	public Employee getEmployeeByUsername(String user);
 	public boolean getManagerStatus(String user);
-	//Test
 	public Employee updateEmployeeEmail(int id, String email);
 	public Employee updateEmployeeBirthday(int id, Date birthday);
 	public Employee updateEmployeeAddress(int id, String address);
