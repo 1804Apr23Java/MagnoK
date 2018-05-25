@@ -37,7 +37,8 @@ public class ManApproveServlet extends HttpServlet {
 		Reimbursements r = rd.approveReimbursement(rId, mId);
 		//System.out.println("Reimbursement: " + rId + " Approved by Manager: " + mId);
 		
-		request.getRequestDispatcher("approvedeny").forward(request, response);
+//		request.getRequestDispatcher("approvedeny").forward(request, response);
+		response.sendRedirect("manviewresolvedreimb");
 	}
 
 }

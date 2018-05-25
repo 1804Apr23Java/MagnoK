@@ -6,6 +6,18 @@
 	<title>All Pending Reimbursements</title>
 	<!-- Linking Bootstrap-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	
+	<style>
+		#approve {
+			background-color: green;
+			color: whitesmoke;
+		}
+		#deny {
+			background-color: red;
+			color: whitesmoke;
+		}
+	</style>
+
 </head>
 
 <body>
@@ -66,7 +78,7 @@
 							<label for="formBday">Reimbusement Number</label>
 							<input type="number" class="form-control" name="rId">
 						</div>
-						<button class="btn btn-primary" type="submit">Approve!
+						<button class="btn btn-primary" type="submit" id="approve">Approve!
 						</button>
 					</form>
 					<form action="ManDenyServlet" method="post">
@@ -75,7 +87,7 @@
 							<input type="number" class="form-control" name="rId">
 						</div>
 						<div>
-							<button class="btn btn-primary" type="submit">Deny!
+							<button class="btn btn-primary" type="submit" id="deny">Deny!
 							</button>
 						</div>
 					</form>

@@ -34,7 +34,8 @@ public class ManDenyServlet extends HttpServlet {
 		rd.denyReimbursement(rId, mId);
 		//System.out.println("Reimbursement: " + rId + " Denied by Manager: " + mId);
 		
-		request.getRequestDispatcher("approvedeny").forward(request, response);
+//		request.getRequestDispatcher("approvedeny").forward(request, response);
+		response.sendRedirect("manviewresolvedreimb");
 	}
 
 }
