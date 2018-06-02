@@ -1,0 +1,22 @@
+/* Making Application-Wide Styles */
+h1 {
+    color: #8F02D5;
+    font-family: fantasy;
+    font-size: 250%;
+}
+h2, h3 {
+    color: #19F74F;
+    font-family: fantasy;
+    font-weight: lighter;
+}
+body {
+    margin: 2em;
+}
+body, input[text], button {
+    color: #1FB09E;
+    font-family: fantasy;
+}
+/* Making styling everywhere */ 
+* {
+    font-family: fantasy;
+}
