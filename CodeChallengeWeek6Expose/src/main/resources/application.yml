@@ -1,0 +1,21 @@
+server:
+  port: 8088
+  
+endpoints:
+  beans:
+    sensitive: false
+  mappings:
+    sensitive: false
+
+spring:
+  application:
+    name: ccw6-app
+  datasource:
+    platform: oracle
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: SYSTEM
+    password: Magnificent-24
+    driver-class-name: oracle.jdbc.OracleDriver
+  jpa:
+    database: ORACLE
+    show-sql: true
